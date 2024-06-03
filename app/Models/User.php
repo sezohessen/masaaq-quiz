@@ -7,11 +7,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
 use Stancl\Tenancy\Database\Concerns\BelongsToTenant;
 
 class User extends Authenticatable
 {
-        use HasApiTokens, HasFactory, Notifiable, BelongsToTenant;
+    use HasApiTokens, HasFactory, Notifiable, BelongsToTenant, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -22,8 +23,10 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'domain_name'
     ];
-
+    public const CLIENT_ROLE = "Client owner";
+    public const ADMIN_ROLE = "Administrator";
     /**
      * The attributes that should be hidden for serialization.
      *

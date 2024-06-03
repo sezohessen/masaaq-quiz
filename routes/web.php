@@ -31,7 +31,7 @@ Route::middleware('auth')->group(function () {
     ->name('tenants.')
     ->controller(TenantController::class)->group(function () {
         Route::get('/create', 'create')->name('create');
-        Route::get('/store', 'store')->name('store');
+        Route::post('/store', 'store')->name('store');
     });
 
 });

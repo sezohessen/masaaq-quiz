@@ -6,7 +6,7 @@
     </x-slot>
     <div class="container mx-auto p-4">
         <div class="card">
-            <form action="{{ route('tenants.store') }}" method="POST" class=" p-6 rounded shadow-md">
+            <form action="{{ route('tenants.store') }}" method="POST" class=" p-6 rounded shadow-md" novalidate>
                 @csrf
                 <div class="mt-3">
                     <x-input-label for="email" :value="__('Email')" :required='true'/>

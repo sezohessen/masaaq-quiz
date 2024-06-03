@@ -9,6 +9,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use Stancl\Tenancy\Facades\Tenancy;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -28,8 +29,19 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
+        if ($tenant = auth()->user()->client) {//TODO: improve redirect
+            return $this->redirectToTenant($tenant);
+        }
 
         return redirect()->intended(RouteServiceProvider::HOME);
+    }
+    public function redirectToTenant($tenant)
+    {
+        $token = tenancy()->impersonate($tenant, auth()->user()->id, '/dashboard');
+        tenancy()->initialize($tenant->id);
+        $domain = $tenant->name;
+        $central_domain = config('tenancy.central_domains')[0];
+        return redirect("http://$domain.$central_domain:8000/impersonate/{$token->token}");
     }
 
     /**

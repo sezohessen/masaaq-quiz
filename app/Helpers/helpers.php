@@ -8,3 +8,9 @@ if (!function_exists('createPassword')) {
         return Hash::make($password);
     }
 }
+if (!function_exists('getSubDomain')) {
+    function getSubDomain()
+    {
+        return tenancy()->tenant?->name;
+    }
+}

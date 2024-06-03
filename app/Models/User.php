@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -12,7 +13,7 @@ use Stancl\Tenancy\Database\Concerns\BelongsToTenant;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, BelongsToTenant, HasRoles;
+    use HasApiTokens, HasFactory, Notifiable, BelongsToTenant, HasRoles, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -23,7 +24,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'domain_name'
+        'domain_name',
+        'tenant_id'
     ];
     public const CLIENT_ROLE = "Client owner";
     public const ADMIN_ROLE = "Administrator";
@@ -46,6 +48,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+    public function isClientOwner()
+    {
+        return $this->hasRole(self::CLIENT_ROLE);
+    }
     /* Scopes */
     public function scopeClients($query)
     {
@@ -62,5 +68,10 @@ class User extends Authenticatable
         });
     }
     /* Scopes */
+    /* relations */
+    public function client()
+    {
+        return $this->hasOne(Tenant::class);
+    }
 
 }

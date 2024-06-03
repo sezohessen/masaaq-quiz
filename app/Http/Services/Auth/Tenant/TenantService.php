@@ -29,8 +29,11 @@ class TenantService
             $user = User::create($this->request_data($request));
             $user->assignRole(User::CLIENT_ROLE);
             DB::commit();
-            $this->createSubdomain($user,$request->domain);
-            $user->update(['domain_name' => $request->domain]);
+            $tenant = $this->createSubdomain($user,$request->domain);
+            $user->update([
+                'domain_name' => $request->domain,
+                'tenant_id' => $tenant->id
+            ]);
             return redirect()->route('tenants.index')->with('success',__('Client has been created successfully.'));
         } catch (\Exception $e) {
             DB::rollBack();

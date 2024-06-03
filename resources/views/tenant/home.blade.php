@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container mx-auto mt-8">
-        <h1 class="text-4xl font-bold text-center">Welcome to {{ tenancy()->tenant?->name }}</h1>
+        <h1 class="text-4xl font-bold text-center">Welcome to {{ getSubDomain() }}</h1>
         <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
             {{-- TODO:Card quizzes after make it --}}
            {{--  @foreach($quizzes as $quiz)

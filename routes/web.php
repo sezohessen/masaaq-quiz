@@ -30,6 +30,7 @@ Route::middleware('auth')->group(function () {
     Route::prefix('tenants')
     ->name('tenants.')
     ->controller(TenantController::class)->group(function () {
+        Route::get('/index', 'index')->name('index');
         Route::get('/create', 'create')->name('create');
         Route::post('/store', 'store')->name('store');
     });

@@ -11,6 +11,10 @@ class TenantController extends Controller
 {
     public function __construct(private TenantService $tenantService){
     }
+    public function index(Request $request)
+    {
+        return $this->tenantService->index($request);
+    }
     public function create(Request $request)
     {
         return $this->tenantService->create($request);

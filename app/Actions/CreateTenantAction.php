@@ -15,7 +15,8 @@ class CreateTenantAction
             "user_id"=> $user->id,
             "ready" => true,
             "email"=> $user->email,
-            "name" => $user->name,
+            "name" => $domain,
+            "user_name" => $user->name
         ]);
 
         $tenant->createDomain([

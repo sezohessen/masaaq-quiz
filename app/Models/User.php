@@ -46,4 +46,21 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+    /* Scopes */
+    public function scopeClients($query)
+    {
+        return $query->whereHas('roles', function ($q) {
+            return $q->where("name", self::CLIENT_ROLE);
+        })->orderBy('id','desc');
+    }
+    public function scopeWhenSearch($query, $search)
+    {
+        return $query->when($search != null, function ($q) use ($search) {
+            return $q->where('name', 'like', '%' . $search . '%')
+                ->orWhere('email', 'like', '%' . $search . '%')
+                ->orWhere('domain_name', 'like', '%' . $search . '%');
+        });
+    }
+    /* Scopes */
+
 }

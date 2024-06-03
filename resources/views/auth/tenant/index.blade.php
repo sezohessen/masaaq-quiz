@@ -18,7 +18,7 @@
                         <span class="mr-2">
                             <i class="fa fa-plus"></i>
                         </span>
-                        {{ __('new Client') }}
+                        {{ __('New client') }}
                     </a>
                 </div>
                 <div class="overflow-x-auto">

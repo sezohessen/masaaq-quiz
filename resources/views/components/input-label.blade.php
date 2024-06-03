@@ -1,5 +1,19 @@
-@props(['value'])
+@props(['value', 'required' => false])
 
-<label {{ $attributes->merge(['class' => 'block font-medium text-sm text-gray-700 dark:text-gray-300']) }}>
+@php
+    $classes = [
+        'block',
+        'font-medium',
+        'text-sm',
+        'text-gray-700',
+        'dark:text-gray-300',
+    ];
+
+    if (isset($required)&&$required=='true') {
+        $classes[] = 'required';
+    }
+@endphp
+
+<label {{ $attributes->merge(['class' => implode(' ', $classes)]) }}>
     {{ $value ?? $slot }}
 </label>

@@ -52,6 +52,10 @@ class User extends Authenticatable
     {
         return $this->hasRole(self::CLIENT_ROLE);
     }
+    public function isAdministrator()
+    {
+        return $this->hasRole(self::ADMIN_ROLE);
+    }
     /* Scopes */
     public function scopeClients($query)
     {

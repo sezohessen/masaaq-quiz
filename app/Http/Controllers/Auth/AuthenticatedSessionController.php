@@ -30,50 +30,21 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
         if ($tenant = auth()->user()->client) {//TODO: improve redirect
-            return $this->redirectToTenant($tenant);
+            return redirect($this->redirectToTenant($tenant));
         }
-
         return redirect()->intended(RouteServiceProvider::HOME);
     }
     public function redirectToTenant($tenant)
     {
         $userId = auth()->user()->id;
-        $token = $this->impersonateTenant($tenant, $userId);
+        Auth::logout();
         $this->initializeTenant($tenant->id);
-        $url = $this->generateTenantUrl($tenant, $token->token);
-
-        return redirect($url);
-    }
-
-    private function impersonateTenant($tenant, $userId)
-    {
-        return tenancy()->impersonate($tenant, $userId, '/dashboard');
+        return $tenant->impersonationUrl($userId,'dashboard.index');
     }
 
     private function initializeTenant($tenantId)
     {
         tenancy()->initialize($tenantId);
-    }
-
-    private function generateTenantUrl($tenant, $token)
-    {
-        $domain = $this->getTenantDomain($tenant);
-        $centralDomain = $this->getCentralDomain();
-        if (env('APP_ENV') == 'local') {
-            return "http://$domain.$centralDomain:8000/impersonate/$token";
-        }else{
-            return "http://$domain.$centralDomain/impersonate/$token";
-        }
-    }
-
-    private function getTenantDomain($tenant)
-    {
-        return $tenant->name;
-    }
-
-    private function getCentralDomain()
-    {
-        return config('tenancy.central_domains')[0];
     }
 
     /**

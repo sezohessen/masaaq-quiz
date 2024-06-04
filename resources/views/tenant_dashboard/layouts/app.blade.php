@@ -86,7 +86,7 @@
                                     </svg>
                                 </button>
                             </div>
-                            <div x-show="open" @click.away="open = false" class="origin-top-left absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+                            <div x-show="open" @click.away="open = false" class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
                                 <div class="py-1" role="none">
                                     <div class="px-4 py-2 text-sm text-gray-700" role="menuitem">
                                         <div class="font-medium">{{ Auth::user()->name }}</div>

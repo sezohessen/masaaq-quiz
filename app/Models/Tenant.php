@@ -25,9 +25,6 @@ class Tenant extends BaseTenant implements TenantWithDatabase
     {
         return $this->belongsTo(User::class);
     }
-    public function getUrlAttribute(){
-        return tenant_route($this->primary_domain->domain .'.'.config("tenancy.central_domains")[0], 'home', [], true) . '/api';
-    }
     public function route($route, $parameters = [], $absolute = true)
     {
         $domain = $this->primary_domain->domain;

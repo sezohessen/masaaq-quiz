@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html dir="rtl" style="direction: rtl" lang="en">
+<html dir="ltr" style="direction: ltr" lang="en">
 <head>
     <title>{{ __('Dashboard') }} | @yield('title', __('dashboard'))</title>
     <meta charset="utf-8" />

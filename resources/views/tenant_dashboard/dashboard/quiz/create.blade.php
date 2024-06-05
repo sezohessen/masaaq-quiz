@@ -6,25 +6,26 @@
     <form action="{{ route('dashboard.quiz.store') }}" method="POST">
         @csrf
         <div class="mb-4">
-            <label for="quiz_title" class="block text-sm font-medium text-gray-700">Quiz Title</label>
-            <input type="text" id="quiz_title" name="quiz_title" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50" required>
+            <label for="title" class="required block text-sm font-medium text-gray-700">Quiz Title</label>
+            <input type="text" id="title" name="title" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50" required>
         </div>
         <div class="mb-4">
-            <label for="quiz_description" class="block text-sm font-medium text-gray-700">Quiz Description</label>
-            <textarea id="quiz_description" name="quiz_description" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"></textarea>
+            <label for="description" class="required block text-sm font-medium text-gray-700">Quiz Description</label>
+            <textarea id="description" name="description" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"></textarea>
         </div>
         <div class="mb-4">
-            <label for="quiz_type" class="block text-sm font-medium text-gray-700">Quiz Type</label>
+            <label for="quiz_type" class="required  text-sm font-medium text-gray-700">Quiz Type</label>
+            <small class="text-gray-700">(In-time:means the quiz will be opened in exact time, Out-time: means quiz opened at any time )</small>
             <select id="quiz_type" name="quiz_type" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50" required>
                 <option value="in-time">In-Time</option>
                 <option value="out-time">Out-Time</option>
             </select>
         </div>
         <div class="mb-4" id="time_container" style="display: none;">
-            <label for="start_date" class="block text-sm font-medium text-gray-700">Start Date</label>
-            <input type="date" id="start_date" name="start_date" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
-            <label for="end_date" class="block text-sm font-medium text-gray-700 mt-2">End Date</label>
-            <input type="date" id="end_date" name="end_date" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+            <label for="start_date" class="required block text-sm font-medium text-gray-700">Start Date</label>
+            <input type="datetime-local" id="start_date" name="start_time" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+            <label for="end_date" class="required block text-sm font-medium text-gray-700 mt-2">End Date</label>
+            <input type="datetime-local" id="end_date" name="end_time" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
         </div>
 
         <div id="questions_container" class="mb-4">

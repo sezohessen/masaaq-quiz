@@ -1,0 +1,8 @@
+.required:after {
+    content: "*";
+    position: relative;
+    font-size: inherit;
+    color: #f1416c;
+    padding-left: 0.25rem;
+    font-weight: 700;
+}

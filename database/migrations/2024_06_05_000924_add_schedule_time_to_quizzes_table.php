@@ -19,7 +19,7 @@ return new class extends Migration
             $table->dateTime('start_time')->nullable();
             $table->dateTime('end_time')->nullable();
             $table->integer('score')->default(0);
-            $table->integer('number_of_question')->default(0);
+            $table->integer('number_of_questions')->default(0);
         });
     }
 

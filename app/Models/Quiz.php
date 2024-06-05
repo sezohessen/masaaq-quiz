@@ -9,6 +9,9 @@ use Stancl\Tenancy\Database\Concerns\BelongsToTenant;
 class Quiz extends Model
 {
     use BelongsToTenant;
+    protected $fillable = [
+        'title', 'slug', 'description', 'quiz_type', 'start_time', 'end_time', 'score', 'number_of_questions'
+    ];
     public const InTimeType = 1;
     public const OutTimeType = 0;
 

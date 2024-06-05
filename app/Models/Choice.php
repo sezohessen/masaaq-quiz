@@ -11,7 +11,11 @@ class Choice extends Model
 {
     use BelongsToTenant;
 
-    public function question(): BelongsTo
+    protected $fillable = [
+        'question_id', 'title', 'is_correct', 'order', 'description'
+    ];
+
+    public function question()
     {
         return $this->belongsTo(Question::class);
     }

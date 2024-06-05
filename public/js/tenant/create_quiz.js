@@ -11,13 +11,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function addQuestion() {
         const questionHtml = `
-         <div class="question mb-4 bg-white p-4 rounded-lg shadow-sm" id="question_${questionCounter}">
+         <div class="question mb-4 bg-white p-4 rounded-lg shadow-sm" id="${questionCounter}">
                 <div class="question-header flex justify-between items-center cursor-pointer bg-gray-200 p-2 rounded" onclick="toggleQuestion(${questionCounter})">
                     <label id="question_label_${questionCounter}" class="block text-sm font-medium text-gray-700 required ">Question</label>
                     <i class="fas fa-chevron-down ml-2 arrow"></i>
                 </div>
                 <div class="question-body mt-2" style="display: none;">
-                    <input type="text" id="question_${questionCounter}_title" name="questions[]" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50" required>
+                    <input type="text" id="question_${questionCounter}_title" name="questions[]" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50" data-required="true">
                     <label for="question_description_${questionCounter}" class="block text-sm font-medium text-gray-700 mt-2">Question Description</label>
                     <textarea id="question_description_${questionCounter}" name="question_descriptions[]" rows="2" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"></textarea>
                     <label for="question_score_${questionCounter}" class="block text-sm font-medium text-gray-700 mt-2 required ">Question Score</label>
@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function () {
         <div class="choice mb-2 p-2 rounded-lg shadow-sm bg-white grid grid-cols-1 md:grid-cols-2 gap-4">
             <div class="col-span-1 md:col-span-1">
                 <label for="choice_title_${index}" class="block text-sm font-medium text-gray-700 required ">Choice Title</label>
-                <input type="text" id="choice_title_${index}" name="choices[${index}][]" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50" required>
+                <input type="text" id="choice_title_${index}" name="choices[${index}][]" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50" data-required="true">
             </div>
             <div class="col-span-1 md:col-span-1">
                 <label for="choice_order_${index}" class="block text-sm font-medium text-gray-700">Choice Order</label>
@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function handleIsCorrectChange(radio, choicesContainer) {
-        if (radio.checked) {
+        if (radio.checked&&choicesContainer&&typeof index!=='undefined') {
             choicesContainer.querySelectorAll(`input[type="radio"][name="is_corrects[${index}][]"]`).forEach(r => {
                 if (r !== radio) {
                     r.checked = false;
@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const timeContainer = document.getElementById('time_container');
 
     quizTypeSelect.addEventListener('change', function () {
-        if (quizTypeSelect.value === 'out-time') {
+        if (quizTypeSelect.value === '1') {
             timeContainer.style.display = 'block';
         } else {
             timeContainer.style.display = 'none';
@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
       window.toggleQuestion = function(questionCounter) {
         const questionNumber = (questionCounter + 1) + ' - ';
-        const questionElement = document.getElementById(`question_${questionCounter}`);
+        const questionElement = document.getElementById(`${questionCounter}`);
         const questionBody = questionElement.querySelector('.question-body');
         const arrow = questionElement.querySelector('.arrow');
         const questionTitle = questionElement.querySelector(`#question_${questionCounter}_title`);
@@ -138,17 +138,47 @@ document.addEventListener('DOMContentLoaded', function () {
             questionBody.style.display = 'block';
             arrow.classList.remove('fa-chevron-down');
             arrow.classList.add('fa-chevron-up');
-            questionTitle.disabled = false;
             questionLabel.innerText = questionNumber + 'Question';
+            questionElement.classList.remove('border', 'border-red-500');
         } else {
             questionBody.style.display = 'none';
             arrow.classList.remove('fa-chevron-up');
             arrow.classList.add('fa-chevron-down');
-            questionTitle.disabled = true;
             questionLabel.innerText = questionTitle.value ? questionNumber + questionTitle.value : questionNumber + 'Question';
             if (questionScore.value) {
                 questionLabel.innerText += ` - (${questionScore.value})`;
             }
         }
     }
+    function validateForm() {
+        let valid = true;
+        document.querySelectorAll('.question').forEach(question => {
+            const questionBody = question.querySelector('.question-body');
+            const requiredFields = question.querySelectorAll('[data-required="true"]');
+
+            console.log(requiredFields);
+            let questionValid = true;
+            requiredFields.forEach(field => {
+                if (!field.value) {
+                    questionValid = false;
+                }
+            });
+            if (!questionValid) {
+                question.classList.add('border', 'border-red-500');
+                questionBody.style.display = 'block';
+                valid = false;
+            } else {
+                question.classList.remove('border', 'border-red-500');
+                questionBody.style.display = 'none';
+            }
+        });
+        return valid;
+    }
+
+    document.getElementById('quiz_form').addEventListener('submit', function(event) {
+        if (!validateForm()) {
+            event.preventDefault();
+        }
+    });
+
 });

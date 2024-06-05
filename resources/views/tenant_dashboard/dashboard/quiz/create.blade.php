@@ -3,7 +3,7 @@
 @section('content')
 <!--begin::Content-->
 <div class="content d-flex flex-column flex-column-fluid pt-0">
-    <form action="{{ route('dashboard.quiz.store') }}" method="POST">
+    <form id="quiz_form" action="{{ route('dashboard.quiz.store') }}" method="POST">
         @csrf
         <div class="mb-4">
             <label for="title" class="required block text-sm font-medium text-gray-700">Quiz Title</label>
@@ -11,14 +11,14 @@
         </div>
         <div class="mb-4">
             <label for="description" class="required block text-sm font-medium text-gray-700">Quiz Description</label>
-            <textarea id="description" name="description" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"></textarea>
+            <textarea id="description" name="description" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50" required></textarea>
         </div>
         <div class="mb-4">
             <label for="quiz_type" class="required  text-sm font-medium text-gray-700">Quiz Type</label>
             <small class="text-gray-700">(In-time:means the quiz will be opened in exact time, Out-time: means quiz opened at any time )</small>
             <select id="quiz_type" name="quiz_type" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50" required>
-                <option value="in-time">In-Time</option>
-                <option value="out-time">Out-Time</option>
+                <option value="0">Out-Time</option>
+                <option value="1">In-Time</option>
             </select>
         </div>
         <div class="mb-4" id="time_container" style="display: none;">

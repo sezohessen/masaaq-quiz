@@ -19,10 +19,19 @@
 
 <body id="kt_body" class="bg-gray-100 text-gray-900 antialiased">
     <!-- Alerts -->
+    <script>
+        function showAlert(type, message) {
+            Swal.fire({
+                icon: type
+                , title: message
+                , showConfirmButton: true
+                , timer: 900000000
+            });
+        }
+    </script>
     @if(session('success'))
     <script>
         showAlert('success', `{{ session('success') }}`);
-
     </script>
     @endif
 
@@ -37,16 +46,6 @@
         @if($errors->any())
         showAlert('error', '<ul>@foreach ($errors->all() as $error)<li style="list-style-type: none">{{ $error }}</li>@endforeach</ul> <br>');
         @endif
-
-        function showAlert(type, message) {
-            Swal.fire({
-                icon: type
-                , title: message
-                , showConfirmButton: true
-                , timer: 900000000
-            });
-        }
-
     </script>
 
     <div class="min-h-screen flex flex-col">

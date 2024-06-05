@@ -15,6 +15,10 @@ class QuizController extends Controller
     {
         return $this->quizService->create($request);
     }
+    public function index(Request $request)
+    {
+        return $this->quizService->index($request);
+    }
     public function store(CreateQuizFormRequest $request)
     {
         return $this->quizService->store($request);

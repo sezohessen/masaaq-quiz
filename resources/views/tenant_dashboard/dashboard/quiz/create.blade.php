@@ -3,6 +3,7 @@
 @section('content')
 <!--begin::Content-->
 <div class="content d-flex flex-column flex-column-fluid pt-0">
+    <x-breadCrumb.create section="Quizzes" path="{{ route('dashboard.quiz.index') }}" />
     <form id="quiz_form" action="{{ route('dashboard.quiz.store') }}" method="POST">
         @csrf
         <div class="mb-4">

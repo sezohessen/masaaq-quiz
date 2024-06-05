@@ -63,7 +63,7 @@
                     </a>
                 </nav>
                 <nav class="flex flex-col">
-                    <a href="{{ route('dashboard.quiz.create') }}" class="py-2 px-4 {{ $sub_link == 'quiz' ? 'bg-gray-700' : '' }} hover:bg-gray-700">
+                    <a href="{{ route('dashboard.quiz.index') }}" class="py-2 px-4 {{ $sub_link == 'quiz' ? 'bg-gray-700' : '' }} hover:bg-gray-700">
                         <i class="fas fa-book"></i> {{ __('Quizzes') }}
                     </a>
                 </nav>

@@ -38,6 +38,7 @@ Route::middleware([
             ->group(function () {
                 Route::get('/create', [QuizController::class, 'create'])->name('create');
                 Route::post('/store', [QuizController::class, 'store'])->name('store');
+                Route::get('/index', [QuizController::class, 'index'])->name('index');
             });
         });
     Route::post('/logout', function () {

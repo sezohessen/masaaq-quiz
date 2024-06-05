@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\DB;
 
 class QuizService
 {
+    public function index($request)
+    {
+        $quizzes = Quiz::all();
+        return view('tenant_dashboard.dashboard.quiz.index',compact('quizzes'));
+    }
     public function create($request)
     {
         return view('tenant_dashboard.dashboard.quiz.create');
@@ -27,7 +32,7 @@ class QuizService
             return redirect()->back()->with('success',__('Created Successfully'));
         } catch (\Exception $e) {
             DB::rollBack();
-            dd($e->getMessage());//Sentry log
+            logger($e->getMessage());//Sentry log
             return redirect()->back()->with('error',__('Something went wrong'));
         }
     }

@@ -21,7 +21,11 @@
                                 @if ($quiz->isAvailableToStartNow())
                                     <a href="#" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Start Quiz</a>
                                 @else
-                                    <span class="text-blue-500">Start at: {{ $quiz->start_time->format('Y-m-d H:i')  }}</span>
+                                    @if ($quiz->isEnded())
+                                    <span class="text-blue-500">Finished</span>
+                                    @else
+                                    <span class="text-blue-500">Start at: {{ $quiz->start_time->format('Y-m-d h:i A')  }}</span>
+                                    @endif
                                 @endif
                             @else
                                 <a href="#" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Start Quiz</a>

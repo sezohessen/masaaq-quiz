@@ -33,6 +33,15 @@ class Quiz extends Model
 
         return true; // Quiz is available to start immediately if quiz_type is not 1 or start_time/end_time is not set
     }
+    public function isEnded()
+    {
+        if ($this->quiz_type == 1 && $this->start_time && $this->end_time) {
+            $now = Carbon::now();
+            return $now->gte($this->end_time);
+        }
+
+        return true; // Quiz is available to start immediately if quiz_type is not 1 or start_time/end_time is not set
+    }
     public function questions(): HasMany
     {
         return $this->hasMany(Question::class);

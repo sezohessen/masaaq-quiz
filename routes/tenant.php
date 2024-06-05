@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 use App\Http\Controllers\Tenant\Admin\Auth\LoginController;
 use App\Http\Controllers\Tenant\Dashboard\DashboardController;
+use App\Http\Controllers\Tenant\Dashboard\Quiz\QuizController;
 use App\Http\Controllers\Tenant\HomeController;
 use Illuminate\Support\Facades\Route;
 use Stancl\Tenancy\Features\UserImpersonation;
-use Stancl\Tenancy\Middleware\InitializeTenancyByDomain;
-use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +33,12 @@ Route::middleware([
         ->name('dashboard.')
         ->group(function () {
             Route::get('/', [DashboardController::class, 'index'])->name('index');
+            Route::prefix('quiz')
+            ->name('quiz.')
+            ->group(function () {
+                Route::get('/create', [QuizController::class, 'create'])->name('create');
+                Route::post('/store', [QuizController::class, 'store'])->name('store');
+            });
         });
     Route::post('/logout', function () {
         Auth::logout();

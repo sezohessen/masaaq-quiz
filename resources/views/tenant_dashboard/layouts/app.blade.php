@@ -59,8 +59,13 @@
                     </a>
                 </div>
                 <nav class="flex flex-col py-4">
-                    <a href="{{ route('dashboard.index') }}" class="py-2 px-4 {{ $link == 'dashboard' ? 'bg-gray-700' : '' }} hover:bg-gray-700">
+                    <a href="{{ route('dashboard.index') }}" class="py-2 px-4 {{ $link == 'dashboard' && $sub_link =='' ? 'bg-gray-700' : '' }} hover:bg-gray-700">
                         <i class="fa fa-tachometer-alt mr-2"></i> {{ __('Summary') }}
+                    </a>
+                </nav>
+                <nav class="flex flex-col">
+                    <a href="{{ route('dashboard.quiz.create') }}" class="py-2 px-4 {{ $sub_link == 'quiz' ? 'bg-gray-700' : '' }} hover:bg-gray-700">
+                        <i class="fas fa-book"></i> {{ __('Quizzes') }}
                     </a>
                 </nav>
             </div>

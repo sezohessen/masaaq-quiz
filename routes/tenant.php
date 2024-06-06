@@ -2,12 +2,13 @@
 
 declare(strict_types=1);
 
-use App\Http\Controllers\Tenant\Admin\Auth\LoginController;
+use App\Http\Controllers\Tenant\Auth\LoginController;
+use App\Http\Controllers\Tenant\Auth\RegisterController;
 use App\Http\Controllers\Tenant\Dashboard\DashboardController;
 use App\Http\Controllers\Tenant\Dashboard\Quiz\QuizController;
 use App\Http\Controllers\Tenant\HomeController;
+use App\Http\Controllers\Tenant\UserImpersonateController;
 use Illuminate\Support\Facades\Route;
-use Stancl\Tenancy\Features\UserImpersonation;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,10 +25,15 @@ Route::middleware([
     'web',
     'tenant'
 ])->group(function () {
-    Route::get('/impersonate/{token}', function ($token) {
-        return UserImpersonation::makeResponse($token);
-    })->name("impersonate");
+    Route::get('/impersonate/{token}', [UserImpersonateController::class,'impersonate'])->name("impersonate");
     Route::get('/', [HomeController::class, 'home'])->name('home');
+    Route::middleware('guest')->group(function () {
+        Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
+        Route::post('login', [LoginController::class, 'login']);
+        Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+        Route::post('register', [RegisterController::class, 'register']);
+    });
+
     Route::middleware(['auth', 'client_owner'])
         ->prefix('dashboard')
         ->name('dashboard.')

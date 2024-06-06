@@ -24,7 +24,7 @@
                                     @if ($quiz->isEnded())
                                     <span class="text-blue-500">Finished</span>
                                     @else
-                                    <span class="text-blue-500">Start at: {{ $quiz->start_time->format('Y-m-d h:i A')  }}</span>
+                                    <span class="text-blue-500">Start at: {{ $quiz->start_time?->format('Y-m-d h:i A')  }}</span>
                                     @endif
                                 @endif
                             @else

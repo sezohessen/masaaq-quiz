@@ -17,13 +17,22 @@ class UserSeeder extends Seeder
     {
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
-        $roles = ['Administrator', 'Client owner','Member'];
+        $roles = ['Administrator', 'Client owner'];
 
         foreach ($roles as $role) {
             Role::firstOrCreate(['name' => $role]);
         }
         $this->createUser()->assignRole(User::ADMIN_ROLE);
+        $this->createMember();
 
+    }
+    public function createMember()
+    {
+        return User::create([
+            'email' => 'member1@account.com',
+            'name' => 'Member1',
+            'password' => createPassword('password')
+        ]);
     }
     public function createUser()
     {

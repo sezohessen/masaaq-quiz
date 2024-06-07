@@ -53,7 +53,7 @@ Route::middleware([
         Route::prefix('quiz')
             ->name('quiz.')
             ->controller(QuizController::class)->group(function () {
-                Route::get('/start-quiz/{quiz:slug}', 'show')->name('show');
+                Route::get('/start-quiz/{id}/{quiz:slug}', 'show')->name('show');
             });
     });
     Route::post('/logout', function () {

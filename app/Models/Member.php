@@ -26,4 +26,8 @@ class Member extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+    public function subscribed_quizzes()
+    {
+        return $this->hasMany(SubscribeQuiz::class);
+    }
 }

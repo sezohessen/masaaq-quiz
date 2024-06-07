@@ -31,7 +31,11 @@ class Quiz extends Model
             return $now->gte($this->start_time) && $now->lte($this->end_time);
         }
 
-        return true; // Quiz is available to start immediately if quiz_type is not 1 or start_time/end_time is not set
+        return true;
+    }
+    public function isInTime()
+    {
+        return $this->quiz_type == self::InTimeType;
     }
     public function isEnded()
     {
@@ -40,7 +44,7 @@ class Quiz extends Model
             return $now->gte($this->end_time);
         }
 
-        return true; // Quiz is available to start immediately if quiz_type is not 1 or start_time/end_time is not set
+        return false;
     }
     public function questions(): HasMany
     {

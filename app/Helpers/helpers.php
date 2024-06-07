@@ -14,3 +14,9 @@ if (!function_exists('getSubDomain')) {
         return tenancy()->tenant?->name;
     }
 }
+if (!function_exists('getAuth')) {
+    function getAuth()
+    {
+      return auth('sanctum')->user();
+    }
+}

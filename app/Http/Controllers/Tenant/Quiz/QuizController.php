@@ -17,4 +17,8 @@ class QuizController extends Controller
     {
         return $this->quizService->show($request, $quiz);
     }
+    public function subscribe(Request $request, Quiz $quiz)
+    {
+        return $this->quizService->subscribe($request, $quiz);
+    }
 }

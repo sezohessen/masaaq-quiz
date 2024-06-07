@@ -22,13 +22,16 @@
                                     <a href="#" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Start Quiz</a>
                                 @else
                                     @if ($quiz->isEnded())
-                                    <span class="text-blue-500">Finished</span>
+                                        <span class="text-blue-500">Finished</span>
                                     @else
-                                    <span class="text-blue-500">Start at: {{ $quiz->start_time?->format('Y-m-d h:i A')  }}</span>
+                                        <a href="{{ route('quiz.show', ['id' => $quiz->id, 'quiz' => $quiz->slug]) }}" class="inline-block bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded">
+                                            Subscribe
+                                        </a>
+                                        <span class="text-blue-500 block">Start at: {{ $quiz->start_time?->format('Y-m-d h:i A') }}</span>
                                     @endif
                                 @endif
                             @else
-                                <a href="{{ route('quiz.show',['id' => $quiz->id,'quiz' => $quiz->slug]) }}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+                                <a href="{{ route('quiz.show', ['id' => $quiz->id, 'quiz' => $quiz->slug]) }}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
                                     Start Quiz
                                 </a>
                             @endif

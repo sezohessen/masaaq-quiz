@@ -13,6 +13,7 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
     </head>
     <body class="font-sans antialiased">
         @include('components.tenant.header')
@@ -20,6 +21,7 @@
         @yield('content')
 
         @include('components.tenant.footer')
-
+        @yield('js')
+        @stack('scripts')
     </body>
 </html>

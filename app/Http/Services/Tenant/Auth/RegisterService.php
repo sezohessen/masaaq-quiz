@@ -11,7 +11,7 @@ class RegisterService
 {
     public function showRegistrationForm($request)
     {
-        return view('tenant.Auth.register');
+        return view('tenant.auth.register');
     }
     public function register($request)
     {

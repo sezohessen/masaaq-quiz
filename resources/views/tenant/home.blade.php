@@ -28,7 +28,9 @@
                                     @endif
                                 @endif
                             @else
-                                <a href="#" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Start Quiz</a>
+                                <a href="{{ route('quiz.show',['quiz' => $quiz->slug]) }}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+                                    Start Quiz
+                                </a>
                             @endif
                         </div>
                     </div>

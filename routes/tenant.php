@@ -5,8 +5,9 @@ declare(strict_types=1);
 use App\Http\Controllers\Tenant\Auth\LoginController;
 use App\Http\Controllers\Tenant\Auth\RegisterController;
 use App\Http\Controllers\Tenant\Dashboard\DashboardController;
-use App\Http\Controllers\Tenant\Dashboard\Quiz\QuizController;
+use App\Http\Controllers\Tenant\Dashboard\Quiz\QuizController as DashboardQuizController;
 use App\Http\Controllers\Tenant\HomeController;
+use App\Http\Controllers\Tenant\Quiz\QuizController;
 use App\Http\Controllers\Tenant\UserImpersonateController;
 use Illuminate\Support\Facades\Route;
 
@@ -42,11 +43,19 @@ Route::middleware([
             Route::prefix('quiz')
             ->name('quiz.')
             ->group(function () {
-                Route::get('/create', [QuizController::class, 'create'])->name('create');
-                Route::post('/store', [QuizController::class, 'store'])->name('store');
-                Route::get('/index', [QuizController::class, 'index'])->name('index');
+                Route::get('/create', [DashboardQuizController::class, 'create'])->name('create');
+                Route::post('/store', [DashboardQuizController::class, 'store'])->name('store');
+                Route::get('/index', [DashboardQuizController::class, 'index'])->name('index');
             });
-        });
+    });
+    Route::middleware(['auth'])
+        ->group(function () {
+        Route::prefix('quiz')
+            ->name('quiz.')
+            ->controller(QuizController::class)->group(function () {
+                Route::get('/start-quiz/{quiz:slug}', 'show')->name('show');
+            });
+    });
     Route::post('/logout', function () {
         Auth::logout();
         return redirect()->route("home");

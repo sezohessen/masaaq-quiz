@@ -17,6 +17,6 @@ class LoginService
 
         $request->session()->regenerate();
 
-        return redirect()->intended(RouteServiceProvider::TENANT);
+        return redirect()->intended(RouteServiceProvider::HOME);
     }
 }

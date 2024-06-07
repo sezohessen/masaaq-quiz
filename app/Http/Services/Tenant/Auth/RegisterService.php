@@ -19,7 +19,7 @@ class RegisterService
 
         Auth::login($member);
 
-        return redirect(RouteServiceProvider::TENANT);
+        return redirect(RouteServiceProvider::HOME);
     }
     public function createMember($request): Member
     {

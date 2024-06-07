@@ -10,7 +10,7 @@ class Member extends Authenticatable
 {
     use HasFactory,HasApiTokens, BelongsToTenant;
     protected $fillable = [
-        'name', 'email', 'tenant_id','password','device_token'
+        'name', 'email', 'tenant_id','password','google_access_token'
     ];
     protected $hidden = [
         'password',
@@ -25,9 +25,14 @@ class Member extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+        'google_access_token' => 'json',
     ];
     public function subscribed_quizzes()
     {
         return $this->hasMany(SubscribeQuiz::class);
+    }
+    public function isClientOwner()
+    {
+        return false;
     }
 }

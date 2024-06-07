@@ -16,7 +16,7 @@ class ClientOwner
     public function handle(Request $request, Closure $next): Response
     {
         $user = $request->user();
-        if ($user&& !$user->isClientOwner()) {
+        if ($user&& !$user?->isClientOwner()) {
             return abort(403, __('Unauthorized'));
         }
 

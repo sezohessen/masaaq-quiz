@@ -49,7 +49,7 @@ class QuizService
 
     public function uniqueLink()
     {
-        return Str::random(10);
+        return route('quiz.begin',['link' => Str::random(10)]);
     }
 
     public function scheduleReminder($quiz, $link)

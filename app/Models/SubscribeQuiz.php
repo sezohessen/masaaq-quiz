@@ -13,6 +13,7 @@ class SubscribeQuiz extends Model
         'member_id',
         'link',
         'quiz_id',
+        'has_started'
     ];
 
     public function getRelationshipToPrimaryModel(): string
@@ -27,5 +28,16 @@ class SubscribeQuiz extends Model
     {
         return $this->belongsTo(Member::class);
     }
+    /* Scopes */
+    public function scopeHasNotStarted($query)
+    {
+        return $query->where('has_started',false);
+    }
+    public function hasStarted()
+    {
+        $this->has_started = true;
+        $this->save();
+    }
+    /* getter and setters */
 
 }

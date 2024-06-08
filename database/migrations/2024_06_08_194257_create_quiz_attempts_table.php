@@ -22,12 +22,12 @@ return new class extends Migration
             ->constrained()
             ->cascadeOnDelete()
             ->cascadeOnUpdate();
-            $table->timestamps();
             $table->decimal('score',10,2)->nullable();
             $table->boolean('passed')->default(false);
             $table->string('link')->nullable();
             $table->datetime('start_time')->nullable();
             $table->datetime('end_time')->nullable();
+            $table->timestamps();
 
         });
     }

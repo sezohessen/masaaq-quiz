@@ -31,10 +31,17 @@ class Member extends Authenticatable
     {
         return $this->hasMany(SubscribeQuiz::class);
     }
+    public function attempts()
+    {
+        return $this->hasMany(QuizAttempt::class);
+    }
     public function hasSubscribedQuiz($link)
     {
         $routeLink = route('quiz.begin',['link' => $link]);
-        return $this->subscribed_quizzes()->where('link',$routeLink)->first();
+        return $this->subscribed_quizzes()
+        /* ->hasNotStarted() */
+        ->where('link',$routeLink)
+        ->first();
     }
     public function isClientOwner()
     {

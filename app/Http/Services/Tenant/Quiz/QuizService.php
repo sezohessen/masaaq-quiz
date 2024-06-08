@@ -59,10 +59,30 @@ class QuizService
     }
     public function begin($request, $link)
     {
-        if (!$subscribed = getAuth()->hasSubscribedQuiz($link)) {
+        if (!$subscribed = getAuth()->hasSubscribedQuiz($link)) {//TODO: Use policies
             return abort(404);
         }
+        if (!$subscribed->quiz?->isAvailableToStartNow()) {
+            return redirect()
+            ->route('quiz.show',['id' => $subscribed->quiz?->id,'quiz' => $subscribed->quiz])
+            ->with('error',__('Quiz is not available for now'));
+        }
+        $attempt = $this->insertAttempt($subscribed,$link);
+        $quiz = $subscribed->quiz;
+        return view('tenant.quiz.begin',compact('attempt','quiz'));
 
-        dd(1);
+    }
+    public function insertAttempt($subscribed,$link)
+    {
+        if($subscribed->has_started){
+            return getAuth()->attempts()->where('link',$link)->first();
+        }else{
+            $subscribed->hasStarted();
+            return getAuth()->attempts()->create([
+                'quiz_id' => $subscribed->quiz?->id,
+                'link' => $link,
+                'start_time' => now()
+            ]);
+        }
     }
 }

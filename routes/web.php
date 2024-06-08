@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\Tenant\TenantController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Tenant\Quiz\GoogleCalendar\GoogleCalendarController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,5 +41,8 @@ Route::middleware('auth')->group(function () {
     });
 
 });
+
+Route::get('/oauthcallback', [GoogleCalendarController::class, 'handleGoogleCallback'])->name('oauthcallback');
+/* Route::get('/connect/google-calendar', [GoogleCalendarController::class, 'connectGoogleCalendar'])->name('connect.google-calendar'); */
 
 require __DIR__.'/auth.php';

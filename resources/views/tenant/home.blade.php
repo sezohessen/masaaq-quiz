@@ -19,7 +19,7 @@
                         <div class="mt-4">
                             @if ($quiz->quiz_type == 1)
                                 @if ($quiz->isAvailableToStartNow())
-                                    <a href="#" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Start Quiz</a>
+                                    <a href="{{ route('quiz.show', ['id' => $quiz->id, 'quiz' => $quiz->slug]) }}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Start Quiz</a>
                                 @else
                                     @if ($quiz->isEnded())
                                         <span class="text-blue-500">Finished</span>

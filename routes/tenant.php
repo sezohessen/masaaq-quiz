@@ -6,6 +6,7 @@ use App\Http\Controllers\Tenant\Auth\LoginController;
 use App\Http\Controllers\Tenant\Auth\RegisterController;
 use App\Http\Controllers\Tenant\Dashboard\DashboardController;
 use App\Http\Controllers\Tenant\Dashboard\Quiz\QuizController as DashboardQuizController;
+use App\Http\Controllers\Tenant\Quiz\GoogleCalendar\GoogleCalendarController;
 use App\Http\Controllers\Tenant\HomeController;
 use App\Http\Controllers\Tenant\Quiz\QuizController;
 use App\Http\Controllers\Tenant\UserImpersonateController;
@@ -56,6 +57,12 @@ Route::middleware([
                 Route::get('/start-quiz/{id}/{quiz:slug}', 'show')->name('show');
                 Route::get('/subscribe/{quiz}', 'subscribe')->name('subscribe');
                 Route::get('/begin-quiz/{link}', 'begin')->name('begin');
+            });
+        Route::prefix('google-calendar')
+            ->name('google-calendar.')
+            ->controller(GoogleCalendarController::class)->group(function () {
+                Route::get('/authorize', 'authorizeURL')->name('authorize');
+                Route::get('/save-access-token/{code}', 'saveAccessToken')->name('save-access-token');
             });
     });
     Route::post('/logout', function () {

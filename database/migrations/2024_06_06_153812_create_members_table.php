@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreign('tenant_id')->references('id')->on('tenants')->onUpdate('cascade')->onDelete('cascade');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('device_token')->nullable();
+            $table->string('google_access_token')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

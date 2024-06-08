@@ -15,6 +15,7 @@ class Tenant extends BaseTenant implements TenantWithDatabase
         return [
             'id',
             'user_id',
+            'name'
         ];
     }
     public function primary_domain()

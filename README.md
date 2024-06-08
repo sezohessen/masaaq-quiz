@@ -1,4 +1,4 @@
-(test) Assignment Blueprint for backend
+Assignment Blueprint for backend
 ===============================
 
 This is a Laravel blueprint for backend development, for creating a multi-tenant application **(single database)** to manage quizzes

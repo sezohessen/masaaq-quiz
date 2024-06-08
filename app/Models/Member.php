@@ -31,6 +31,11 @@ class Member extends Authenticatable
     {
         return $this->hasMany(SubscribeQuiz::class);
     }
+    public function hasSubscribedQuiz($link)
+    {
+        $routeLink = route('quiz.begin',['link' => $link]);
+        return $this->subscribed_quizzes()->where('link',$routeLink)->first();
+    }
     public function isClientOwner()
     {
         return false;

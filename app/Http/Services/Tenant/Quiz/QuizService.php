@@ -57,4 +57,12 @@ class QuizService
         $reminderTime = $quiz->start_time?->subHour();
         SendQuizReminder::dispatch(getAuth(), $quiz, $link)->delay($reminderTime);
     }
+    public function begin($request, $link)
+    {
+        if (!$subscribed = getAuth()->hasSubscribedQuiz($link)) {
+            return abort(404);
+        }
+
+        dd(1);
+    }
 }

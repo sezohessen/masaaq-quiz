@@ -20,6 +20,15 @@ class QuizAttempt extends Model
     {
         return $this->belongsTo(Quiz::class);
     }
+    public function member()
+    {
+        return $this->belongsTo(Member::class);
+    }
+
+    public function answers()
+    {
+        return $this->hasMany(Answer::class);
+    }
     protected $casts = [
         'start_time' => 'datetime',
         'end_time' => 'datetime',

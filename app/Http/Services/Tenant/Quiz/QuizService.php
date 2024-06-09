@@ -4,7 +4,9 @@ namespace App\Http\Services\Tenant\Quiz;
 
 use App\Jobs\SendQuizLink;
 use App\Jobs\SendQuizReminder;
+use App\Models\Answer;
 use App\Models\Quiz;
+use App\Models\QuizAttempt;
 use App\Models\SubscribeQuiz;
 use Illuminate\Support\Str;
 
@@ -28,7 +30,7 @@ class QuizService
         $this->sendQuizLink($quiz, $link);
 
         if ($quiz->isInTime()) {
-            $this->scheduleReminder($quiz,$link);
+            $this->scheduleReminder($quiz, $link);
         }
 
         return redirect()->back()->with('success', __('You have subscribed for the quiz. You can start the quiz through the link that was sent via email.'));
@@ -49,7 +51,7 @@ class QuizService
 
     public function uniqueLink()
     {
-        return route('quiz.begin',['link' => Str::random(10)]);
+        return route('quiz.begin', ['link' => Str::random(10)]);
     }
 
     public function scheduleReminder($quiz, $link)
@@ -64,19 +66,62 @@ class QuizService
         }
         if (!$subscribed->quiz?->isAvailableToStartNow()) {
             return redirect()
-            ->route('quiz.show',['id' => $subscribed->quiz?->id,'quiz' => $subscribed->quiz])
-            ->with('error',__('Quiz is not available for now'));
+                ->route('quiz.show', ['id' => $subscribed->quiz?->id, 'quiz' => $subscribed->quiz])
+                ->with('error', __('Quiz is not available for now'));
         }
-        $attempt = $this->insertAttempt($subscribed,$link);
+        $attempt = $this->insertAttempt($subscribed, $link);
         $quiz = $subscribed->quiz;
-        return view('tenant.quiz.begin',compact('attempt','quiz'));
+        $quiz->load('questions', 'questions.choices');
+        return view('tenant.quiz.begin', compact('attempt', 'quiz'));
 
     }
-    public function insertAttempt($subscribed,$link)
+    public function finish($request, QuizAttempt $quizAttempt)
     {
-        if($subscribed->has_started){
-            return getAuth()->attempts()->where('link',$link)->first();
-        }else{
+        $quiz = $quizAttempt->quiz()->with('questions.choices')->first();
+
+        // Store answers
+
+        $totalScore = $this->storeAnswerers($request, $quiz, $quizAttempt);
+        $this->updateQuizAttempt($quizAttempt, $totalScore, $quiz);
+
+        return redirect()->route('quiz.result', ['quiz_attempt' => $quizAttempt->id])->with('success', __('Quiz has been submitted successfully'));
+    }
+    public function updateQuizAttempt($quizAttempt, $totalScore, $quiz)
+    {
+        $passed = $totalScore >= ($quiz->score / 2);//Assume the pass percentage is 50%
+
+        $quizAttempt->update([
+            'score' => $totalScore,
+            'passed' => $passed,
+            'end_time' => now(),
+        ]);
+    }
+    public function storeAnswerers($request, $quiz, $quizAttempt)
+    {
+        $totalScore = 0;
+        foreach ($request->answers as $questionId => $choiceId) {
+            $question = $quiz->questions()->find($questionId);
+            $choice = $question->choices()->find($choiceId);
+
+            $isCorrect = $choice->is_correct;
+
+            if ($isCorrect) {
+                $totalScore += $question->score;
+            }
+            Answer::create([
+                'quiz_attempt_id' => $quizAttempt->id,
+                'question_id' => $questionId,
+                'choice_id' => $choiceId,
+                'is_correct' => $isCorrect,
+            ]);
+        }
+        return $totalScore;
+    }
+    public function insertAttempt($subscribed, $link)
+    {
+        if ($subscribed->has_started) {
+            return getAuth()->attempts()->where('link', $link)->first();
+        } else {
             $subscribed->hasStarted();
             return getAuth()->attempts()->create([
                 'quiz_id' => $subscribed->quiz?->id,

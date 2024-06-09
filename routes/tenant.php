@@ -42,13 +42,13 @@ Route::middleware([
         ->name('dashboard.')
         ->group(function () {
             /* Route::get('/', [FilamentDashboardController::class, 'index'])->name('index'); */
-            Route::prefix('quiz')
+           /*  Route::prefix('quiz')
             ->name('quiz.')
             ->group(function () {
                 Route::get('/create', [DashboardQuizController::class, 'create'])->name('create');
                 Route::post('/store', [DashboardQuizController::class, 'store'])->name('store');
                 Route::get('/index', [DashboardQuizController::class, 'index'])->name('index');
-            });
+            }); */
     });
     Route::middleware(['auth'])
         ->group(function () {

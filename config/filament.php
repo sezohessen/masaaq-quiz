@@ -86,4 +86,10 @@ return [
 
     'livewire_loading_delay' => 'default',
 
+    'resources' => [
+        'quizzes' => App\Filament\Resources\QuizResource::class,
+        // Other resource definitions
+    ],
+
+
 ];

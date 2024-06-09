@@ -15,6 +15,7 @@
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Number of Questions</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Quiz Type</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Attempts</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Quiz Time</th>
                 </tr>
             </thead>
@@ -25,8 +26,9 @@
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $quiz->title }}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $quiz->number_of_questions }}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $quiz->quiz_type == 1 ? 'In-Time' : 'Out-Time' }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $quiz->attempts->count() }}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                        @if($quiz->quiz_type == 1)
+                        @if($quiz->isInTime())
                             {{ \Carbon\Carbon::parse($quiz->start_time)->format('Y-m-d H:i') }} - {{ \Carbon\Carbon::parse($quiz->end_time)->format('Y-m-d H:i') }}
                         @endif
                     </td>

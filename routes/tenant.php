@@ -30,12 +30,12 @@ Route::middleware([
 ])->group(function () {
     Route::get('/impersonate/{token}', [UserImpersonateController::class,'impersonate'])->name("impersonate");
     Route::get('/', [HomeController::class, 'home'])->name('home');
-    /* Route::middleware('guest')->group(function () {
+    Route::middleware('guest')->group(function () {
         Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
         Route::post('login', [LoginController::class, 'login']);
         Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');
         Route::post('register', [RegisterController::class, 'register']);
-    }); */
+    });
 
     Route::middleware(['auth', 'client_owner'])
         ->prefix('dashboard')
@@ -68,8 +68,8 @@ Route::middleware([
                 Route::get('/save-access-token/{code}', 'saveAccessToken')->name('save-access-token');
             });
     });
-    /* Route::post('/logout', function () {
+    Route::post('/logout', function () {
         Auth::logout();
         return redirect()->route("home");
-    })->name('logout'); */
+    })->name('logout');
 });

@@ -7,6 +7,7 @@ use App\Filament\Resources\QuizResource\RelationManagers;
 use App\Models\Quiz;
 use Filament\Forms;
 use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Section;
@@ -36,13 +37,25 @@ class QuizResource extends Resource
                     Textarea::make('description')
                     ->required()
                     ->maxLength(255)
-                    ->columnSpanFull()
+                    ->columnSpanFull(),
+                    Select::make('Type')
+                    ->options([
+                        Quiz::InTimeType => 'In time',
+                        Quiz::OutTimeType => 'Out time',
+                    ])
+                    ->required()
+                    ->native(false),
+                    DateTimePicker::make('Start time'),
+                    DateTimePicker::make('End time'),
                 ]),
                 Section::make('Question')
                 ->description('questions information')
                 ->schema([
-                    DateTimePicker::make('Start time'),
-                    DateTimePicker::make('End time'),
+                    Select::make('Question')
+                    ->required()
+                    ->relationship(name:'questions',titleAttribute:'Question')
+                    /* ->searchable()
+                    ->preload(), */
                 ])->columns(2),
             ]);
     }

@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use App\Http\Middleware\ClientOwner;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -28,7 +29,7 @@ class DashboardPanelProvider extends PanelProvider
             ->path('dashboard')
             ->login()
             ->colors([
-                'primary' => Color::Green,
+                'primary' => Color::Sky,
             ])
             ->font('Poppins')
             ->favicon(asset('images/logo.png'))
@@ -55,6 +56,8 @@ class DashboardPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ]);
+                ClientOwner::class
+            ])
+            ->authGuard('web');//TODO: why login dashboard for user model not member model ?
     }
 }

@@ -38,13 +38,14 @@ class AuthenticatedSessionController extends Controller
     {
         $userId = auth()->user()->id;
         Auth::logout();
-        $this->initializeTenant($tenant->id);
+        $this->initializeTenant($tenant->id,$userId);
         return $tenant->impersonationUrl($userId,'dashboard.index');
     }
 
-    private function initializeTenant($tenantId)
+    private function initializeTenant($tenantId,$userId)
     {
         tenancy()->initialize($tenantId);
+        Auth::loginUsingId($userId);
     }
 
     /**

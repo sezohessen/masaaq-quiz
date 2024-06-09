@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
+use Filament\Pages\Dashboard;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -39,7 +40,7 @@ class AuthenticatedSessionController extends Controller
         $userId = auth()->user()->id;
         Auth::logout();
         $this->initializeTenant($tenant->id,$userId);
-        return $tenant->impersonationUrl($userId,'dashboard.index');
+        return $tenant->impersonationUrl($userId,(new Dashboard)->getRouteName());
     }
 
     private function initializeTenant($tenantId,$userId)

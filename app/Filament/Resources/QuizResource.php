@@ -4,6 +4,8 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\QuizResource\Pages;
 use App\Filament\Resources\QuizResource\RelationManagers;
+use App\Models\Choice;
+use App\Models\Question;
 use App\Models\Quiz;
 use Filament\Forms;
 use Filament\Forms\Components\DateTimePicker;
@@ -12,11 +14,15 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
+use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Collection;
+use phpDocumentor\Reflection\Types\Null_;
 
 class QuizResource extends Resource
 {
@@ -51,9 +57,17 @@ class QuizResource extends Resource
                 Section::make('Question')
                 ->description('questions information')
                 ->schema([
-                    Select::make('Question')
+                    Select::make('question_id')
                     ->required()
-                    ->relationship(name:'questions',titleAttribute:'Question')
+                    ->live()
+                    ->afterStateUpdated(fn(Set $set) => $set('choice_id',null))
+                    ->relationship(name:'questions',titleAttribute:'Question'),
+                    Select::make('choice_id')
+                    ->required()
+                    ->options(fn(Get $get): Collection => Choice::query()
+                    ->where('question_id', $get('question_id'))
+                    ->pluck('title','id'))
+
                     /* ->searchable()
                     ->preload(), */
                 ])->columns(2),

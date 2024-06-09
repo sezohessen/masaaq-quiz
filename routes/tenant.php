@@ -53,6 +53,7 @@ Route::middleware([
             ->name('quiz_attempt.')
             ->group(function () {
                 Route::get('/index', [QuizAttemptController::class, 'index'])->name('index');
+                Route::get('/show/{quiz_attempt}', [QuizAttemptController::class, 'show'])->name('show');
             });
     });
     Route::middleware(['auth'])

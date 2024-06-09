@@ -16,9 +16,9 @@ class QuizAttemptService
         $quizAttempts = QuizAttempt::finished()->get();
         return view('tenant_dashboard.dashboard.quiz_attempt.index',compact('quizAttempts'));
     }
-    public function show($request)
+    public function show($request, QuizAttempt $quizAttempt)
     {
-        $quizzes = Quiz::all();
-        return view('tenant_dashboard.dashboard.quiz.index',compact('quizzes'));
+        $quizAttempt->load(['answers','quiz','quiz.questions','quiz.questions.choices']);
+        return view('tenant_dashboard.dashboard.quiz_attempt.show',compact('quizAttempt'));
     }
 }

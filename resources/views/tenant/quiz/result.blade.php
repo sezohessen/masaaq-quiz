@@ -14,18 +14,24 @@
         </div>
 
         <div class="mt-6">
+            @php
+                $answersByQuestionId = $quizAttempt->answers->keyBy('question_id');
+            @endphp
             @foreach($quizAttempt->quiz?->questions as $index => $question)
+                @php
+                    $userAnswer = $answersByQuestionId->get($question->id);
+                @endphp
                 <div class="mb-6 border-b pb-4">
                     <h2 class="text-xl font-semibold mb-2">{{ $index + 1 }}. {{ $question->question }}</h2>
                     <p class="text-gray-500 mb-2">{{ $question->description }}</p>
 
                     @foreach($question->choices as $choice)
                         <div class="mb-2 flex items-center">
-                            <input type="radio" name="answers[{{ $question->id }}]" value="{{ $choice->id }}" class="form-radio text-blue-600" {{ $choice->id == $quizAttempt->answers->where('question_id', $question->id)->first()->choice_id ? 'checked' : '' }} disabled>
+                            <input type="radio" name="answers[{{ $question->id }}]" value="{{ $choice->id }}" class="form-radio text-blue-600" {{ $choice->id == $userAnswer?->choice_id ? 'checked' : '' }} disabled>
                             <span class="ml-2">{{ $choice->title }}</span>
                             @if($choice->is_correct)
                                 <span class="ml-2 text-green-600">(Correct Answer)</span>
-                            @elseif($choice->id == $quizAttempt->answers->where('question_id', $question->id)->first()->choice_id)
+                            @elseif($choice->id == $userAnswer?->choice_id)
                                 <span class="ml-2 text-red-500">(Your Answer)</span>
                             @endif
                         </div>
@@ -35,7 +41,7 @@
         </div>
 
         <div class="text-center mt-8">
-            <a href="{{ route('quiz.show',['id' => $quizAttempt->quiz?->id,'quiz' => $quizAttempt->quiz?->slug]) }}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Back to Quiz</a>
+            <a href="{{ route('quiz.show', ['id' => $quizAttempt->quiz?->id, 'quiz' => $quizAttempt->quiz?->slug]) }}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Back to Quiz</a>
         </div>
     </div>
 </div>

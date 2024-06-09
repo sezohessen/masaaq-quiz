@@ -34,7 +34,7 @@ class TenantService
                 'domain_name' => $request->domain,
                 'tenant_id' => $tenant->id
             ]);
-            return redirect()->route('tenants.index')->with('success',__('Client has been created successfully.'));
+            return redirect()->route('admin.tenants.index')->with('success',__('Client has been created successfully.'));
         } catch (\Exception $e) {
             DB::rollBack();
             dd($e->getMessage());

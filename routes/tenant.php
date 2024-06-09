@@ -41,7 +41,6 @@ Route::middleware([
         ->prefix('dashboard')
         ->name('dashboard.')
         ->group(function () {
-            /* Route::get('/', [FilamentDashboardController::class, 'index'])->name('index'); */
            /*  Route::prefix('quiz')
             ->name('quiz.')
             ->group(function () {

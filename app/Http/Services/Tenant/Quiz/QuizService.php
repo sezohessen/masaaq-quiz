@@ -80,11 +80,15 @@ class QuizService
         $quiz = $quizAttempt->quiz()->with('questions.choices')->first();
 
         // Store answers
-
         $totalScore = $this->storeAnswerers($request, $quiz, $quizAttempt);
         $this->updateQuizAttempt($quizAttempt, $totalScore, $quiz);
 
-        return redirect()->route('quiz.result', ['quiz_attempt' => $quizAttempt->id])->with('success', __('Quiz has been submitted successfully'));
+        return redirect()->route('quiz.result', ['quiz_attempt' => $quizAttempt->id,'quiz' => $quiz->slug])->with('success', __('Quiz has been submitted successfully'));
+    }
+    public function result($request, QuizAttempt $quizAttempt)
+    {
+        $quizAttempt->load(['answers','quiz','quiz.questions','quiz.questions.choices']);
+        return view('tenant.quiz.result',compact('quizAttempt'));
     }
     public function updateQuizAttempt($quizAttempt, $totalScore, $quiz)
     {
@@ -94,6 +98,7 @@ class QuizService
             'score' => $totalScore,
             'passed' => $passed,
             'end_time' => now(),
+            'has_finished' => true
         ]);
     }
     public function storeAnswerers($request, $quiz, $quizAttempt)
@@ -119,8 +124,8 @@ class QuizService
     }
     public function insertAttempt($subscribed, $link)
     {
-        if ($subscribed->has_started) {
-            return getAuth()->attempts()->where('link', $link)->first();
+        if ($subscribed->has_started && $attempt = getAuth()->attempts()->where('link', $link)->where('has_finished',false)->first()) {
+            return $attempt;
         } else {
             $subscribed->hasStarted();
             return getAuth()->attempts()->create([

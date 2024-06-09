@@ -33,6 +33,6 @@ class QuizController extends Controller
     }
     public function result(Request $request, QuizAttempt $quizAttempt)
     {
-        dd(1);
+        return $this->quizService->result($request, $quizAttempt);
     }
 }

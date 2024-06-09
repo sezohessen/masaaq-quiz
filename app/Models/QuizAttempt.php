@@ -10,7 +10,12 @@ class QuizAttempt extends Model
 {
     use HasFactory,BelongsToPrimaryModel;
     protected $fillable = [
-        'quiz_id', 'member_id', 'score', 'passed', 'link', 'start_time', 'end_time'
+        'quiz_id', 'member_id', 'score', 'passed', 'link', 'start_time', 'end_time','has_finished'
+    ];
+
+    protected $casts = [
+        'start_time' => 'datetime',
+        'end_time' => 'datetime',
     ];
     public function getRelationshipToPrimaryModel(): string
     {
@@ -29,8 +34,4 @@ class QuizAttempt extends Model
     {
         return $this->hasMany(Answer::class);
     }
-    protected $casts = [
-        'start_time' => 'datetime',
-        'end_time' => 'datetime',
-    ];
 }

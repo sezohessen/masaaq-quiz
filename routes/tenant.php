@@ -6,6 +6,7 @@ use App\Http\Controllers\Tenant\Auth\LoginController;
 use App\Http\Controllers\Tenant\Auth\RegisterController;
 use App\Http\Controllers\Tenant\Dashboard\DashboardController;
 use App\Http\Controllers\Tenant\Dashboard\Quiz\QuizController as DashboardQuizController;
+use App\Http\Controllers\Tenant\Dashboard\QuizAttempt\QuizAttemptController;
 use App\Http\Controllers\Tenant\Quiz\GoogleCalendar\GoogleCalendarController;
 use App\Http\Controllers\Tenant\HomeController;
 use App\Http\Controllers\Tenant\Quiz\QuizController;
@@ -47,6 +48,11 @@ Route::middleware([
                 Route::get('/create', [DashboardQuizController::class, 'create'])->name('create');
                 Route::post('/store', [DashboardQuizController::class, 'store'])->name('store');
                 Route::get('/index', [DashboardQuizController::class, 'index'])->name('index');
+            });
+            Route::prefix('quiz_attempt')
+            ->name('quiz_attempt.')
+            ->group(function () {
+                Route::get('/index', [QuizAttemptController::class, 'index'])->name('index');
             });
     });
     Route::middleware(['auth'])

@@ -34,4 +34,9 @@ class QuizAttempt extends Model
     {
         return $this->hasMany(Answer::class);
     }
+    /* Scopes */
+    public function scopeFinished($query)
+    {
+        return $query->where('has_finished',true);
+    }
 }

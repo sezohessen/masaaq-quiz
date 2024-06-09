@@ -54,5 +54,49 @@ class Quiz extends Model
     {
         return $this->hasMany(QuizAttempt::class);
     }
+    public function getAttemptsCountAttribute()
+    {
+        return $this->attempts()->count();
+    }
+
+    public function getPassRateAttribute()
+    {
+        $attempts = $this->attempts()->count();
+        if ($attempts === 0) {
+            return 0;
+        }
+        $passed = $this->attempts()->where('passed', true)->count();
+        return ($passed / $attempts) * 100;
+    }
+
+    public function getFailRateAttribute()
+    {
+        $attempts = $this->attempts()->count();
+        if ($attempts === 0) {
+            return 0;
+        }
+        $failed = $this->attempts()->where('passed', false)->count();
+        return ($failed / $attempts) * 100;
+    }
+
+    public function getAverageScoreAttribute()
+    {
+        return $this->attempts()->avg('score');
+    }
+
+    public function getAverageTimeAttribute()
+    {
+        if(!$this->isInTime())return null;
+        $attempts = $this->attempts()->whereNotNull('end_time')->get();
+        if ($attempts->isEmpty()) {
+            return null;
+        }
+        $totalTime = $attempts->reduce(function ($carry, $attempt) {
+            return $carry + $attempt->end_time->diffInSeconds($attempt->start_time);
+        }, 0);
+        $averageTimeInSeconds = $totalTime / $attempts->count();
+
+        return gmdate('H:i:s', $averageTimeInSeconds);
+    }
 
 }

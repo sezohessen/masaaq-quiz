@@ -67,6 +67,11 @@
                         <i class="fas fa-book"></i> {{ __('Quizzes') }}
                     </a>
                 </nav>
+                <nav class="flex flex-col">
+                    <a href="{{ route('dashboard.quiz_attempt.index') }}" class="py-2 px-4 {{ $sub_link == 'quiz_attempt' ? 'bg-gray-700' : '' }} hover:bg-gray-700">
+                        <i class="fas fa-book"></i> {{ __('Quiz attempts') }}
+                    </a>
+                </nav>
             </div>
 
             <!-- Main Content -->

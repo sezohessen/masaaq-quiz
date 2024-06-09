@@ -49,7 +49,7 @@
                 <p><strong>Number of Questions:</strong> {{ $quiz->number_of_questions }}</p>
                 <p><strong>Score:</strong> {{ $quiz->score }}</p>
                 <p><strong>Start Time:</strong> {{ $quiz->start_time?->format('Y-m-d H:i A') }}</p>
-                    <a href="{{ route('quiz.begin', ['link' => $link]) }}" class="button">Begin Quiz</a>
+                    <a href="{{ $link }}" class="button">Begin Quiz</a>
             </div>
             <div class="card-footer text-center">
                 <p>&copy; {{ date('Y') }} {{ env('APP_NAME') }}. All rights reserved.</p>

@@ -2,18 +2,20 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Stancl\Tenancy\Database\Concerns\BelongsToTenant;
+use Stancl\Tenancy\Database\Concerns\BelongsToPrimaryModel;
 
 class Choice extends Model
 {
-    use BelongsToTenant;
+    use BelongsToPrimaryModel;
 
     protected $fillable = [
         'question_id', 'title', 'is_correct', 'order', 'description'
     ];
+    public function getRelationshipToPrimaryModel(): string
+    {
+        return 'question';
+    }
 
     public function question()
     {

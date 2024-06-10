@@ -5,6 +5,7 @@ namespace App\Http\Services\Tenant\Quiz;
 use App\Jobs\SendQuizLink;
 use App\Jobs\SendQuizReminder;
 use App\Jobs\SendQuizResult;
+use App\Jobs\SendQuizResultForOwner;
 use App\Models\Answer;
 use App\Models\Quiz;
 use App\Models\QuizAttempt;
@@ -85,12 +86,19 @@ class QuizService
         $totalScore = $this->storeAnswerers($request, $quiz, $quizAttempt);
         $this->updateQuizAttempt($quizAttempt, $totalScore, $quiz);
         $this->sendQuizResult($quizAttempt);
+        $this->sendQuizResultForOwner($quizAttempt);
         return redirect()->route('quiz.result', ['quiz_attempt' => $quizAttempt->id,'quiz' => $quiz->slug])->with('success', __('Quiz has been submitted successfully'));
     }
     public function sendQuizResult(QuizAttempt $quizAttempt)
     {
         $link = route('quiz.result',['quiz_attempt' => $quizAttempt?->id,'quiz' => $quizAttempt?->quiz?->slug]);
         SendQuizResult::dispatch(getAuth(), $quizAttempt, $link);
+    }
+    public function sendQuizResultForOwner(QuizAttempt $quizAttempt)
+    {
+        $owner = tenancy()->tenant->user?->email;
+        $link = route('dashboard.quiz_attempt.show',['quiz_attempt' => $quizAttempt->id]);
+        SendQuizResultForOwner::dispatch($owner,getAuth(),$quizAttempt, $link);
     }
     public function result($request, QuizAttempt $quizAttempt)
     {

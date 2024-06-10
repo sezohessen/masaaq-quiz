@@ -40,19 +40,19 @@
 <body>
     <div class="container">
         <div class="card">
-            <div class="card-header">Dear {{ $member->name }},</div>
+            <div class="card-header">Member: ({{ $member->name }}) has finished submitting quiz</div>
             <div class="card-body">
                 <p><strong>Quiz Name:</strong> {{ $quizAttempt?->quiz?->title }}</p>
                 <p><strong>Description:</strong> {{ $quizAttempt?->quiz?->description }}</p>
                 <p><strong>Number of Questions:</strong> {{ $quizAttempt?->quiz?->number_of_questions }}</p>
                 <p class="test-secondary text-sm">
-                    Your Score: <span class="font-bold">{{ $quizAttempt->score }} / {{ $quizAttempt->quiz?->score }}</span>
+                    Member Score: <span class="font-bold">{{ $quizAttempt->score }} / {{ $quizAttempt->quiz?->score }}</span>
                     <span class="text-sm {{ $quizAttempt->passed ? 'text-success' : 'text-danger' }} font-bold">
                         ({{ $quizAttempt->passed ? 'Passed' : 'Failed' }})
                     </span>
                 </p>
-                <p>You can view your quiz answeres and score:</p>
-                <a href="{{ $link }}" class="button">View Quiz result</a>
+                <p>You can view member quiz answeres and score:</p>
+                <a href="{{ $link }}" class="button">View result</a>
             </div>
             <div class="card-footer text-center">
                 <p>&copy; {{ date('Y') }} {{ env('APP_NAME') }}. All rights reserved.</p>

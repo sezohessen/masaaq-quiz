@@ -9,7 +9,6 @@ use App\Jobs\SendQuizResultForOwner;
 use App\Models\Answer;
 use App\Models\Quiz;
 use App\Models\QuizAttempt;
-use App\Models\SubscribeQuiz;
 use Illuminate\Support\Str;
 
 class QuizService
@@ -27,6 +26,12 @@ class QuizService
             return redirect()->back()->with('error', __('Quiz is ended'));
         }
 
+        $this->handleSubscribeQuiz($quiz);
+
+        return redirect()->back()->with('success', __('You have subscribed for the quiz. You can start the quiz through the link that was sent via email.'));
+    }
+    public function handleSubscribeQuiz($quiz)
+    {
         $link = $this->uniqueLink();
         $this->subscribeQuiz($quiz->id, $link);
         $this->sendQuizLink($quiz, $link);
@@ -34,8 +39,6 @@ class QuizService
         if ($quiz->isInTime()) {
             $this->scheduleReminder($quiz, $link);
         }
-
-        return redirect()->back()->with('success', __('You have subscribed for the quiz. You can start the quiz through the link that was sent via email.'));
     }
 
     public function subscribeQuiz($id, $link)

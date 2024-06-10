@@ -5,7 +5,7 @@ use App\Http\Resources\Collection\QuizCollection;
 use App\Http\Resources\QuizResource;
 use App\Models\Quiz;
 use App\Traits\ApiHelpersTrait;
-
+use App\Http\Services\Tenant\Quiz\QuizService as TenantQuizService;
 class QuizService
 {
     use ApiHelpersTrait;
@@ -17,6 +17,15 @@ class QuizService
     public function show($request,$quiz)
     {
         return $this->success('Quiz',new QuizResource($quiz));
+    }
+    public function subscribe($request,$quiz)
+    {
+        if ($quiz->isEnded()) {
+            return $this->sendError('Quiz is ended');
+        }
+        $quizService = new TenantQuizService();
+        $quizService->handleSubscribeQuiz($quiz);
+        return $this->success('You have subscribed for the quiz. You can start the quiz through the link that was sent via email.');
     }
     public function getQuizzes($request)
     {

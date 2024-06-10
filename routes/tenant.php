@@ -6,10 +6,11 @@ use App\Http\Controllers\Tenant\Auth\LoginController;
 use App\Http\Controllers\Tenant\Auth\RegisterController;
 use App\Http\Controllers\Tenant\Dashboard\DashboardController;
 use App\Http\Controllers\Tenant\Dashboard\Quiz\QuizController as DashboardQuizController;
-use App\Http\Controllers\Tenant\Dashboard\QuizAttempt\QuizAttemptController;
+use App\Http\Controllers\Tenant\Dashboard\QuizAttempt\QuizAttemptController as DashboardQuizAttemptController;
 use App\Http\Controllers\Tenant\Quiz\GoogleCalendar\GoogleCalendarController;
 use App\Http\Controllers\Tenant\HomeController;
 use App\Http\Controllers\Tenant\Quiz\QuizController;
+use App\Http\Controllers\Tenant\QuizAttempt\QuizAttemptController;
 use App\Http\Controllers\Tenant\UserImpersonateController;
 use Illuminate\Support\Facades\Route;
 
@@ -52,8 +53,8 @@ Route::middleware([
             Route::prefix('quiz_attempt')
             ->name('quiz_attempt.')
             ->group(function () {
-                Route::get('/index', [QuizAttemptController::class, 'index'])->name('index');
-                Route::get('/show/{quiz_attempt}', [QuizAttemptController::class, 'show'])->name('show');
+                Route::get('/index', [DashboardQuizAttemptController::class, 'index'])->name('index');
+                Route::get('/show/{quiz_attempt}', [DashboardQuizAttemptController::class, 'show'])->name('show');
             });
     });
     Route::middleware(['auth'])
@@ -66,6 +67,11 @@ Route::middleware([
                 Route::get('/begin-quiz/{link}', 'begin')->name('begin');
                 Route::post('/finish-quiz/{quiz_attempt}', 'finish')->name('finish');
                 Route::get('/result/{quiz_attempt}/{quiz:slug}', 'result')->name('result');
+            });
+        Route::prefix('quiz_attempt')
+            ->name('quiz_attempt.')
+            ->controller(QuizAttemptController::class)->group(function () {
+                Route::get('/my-quizzes', 'index')->name('index');
             });
         Route::prefix('google-calendar')
             ->name('google-calendar.')

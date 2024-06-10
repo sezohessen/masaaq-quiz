@@ -2,7 +2,9 @@
     <div class="container mx-auto flex justify-between items-center">
         <div>
             <a href="{{ url('/') }}" class="text-white text-lg font-bold">Home</a>
-            <a href="#" class="text-white text-lg ml-4">All Quizzes</a>
+            @auth
+            <a href="{{ route('quiz_attempt.index') }}" class="text-white text-lg ml-4">My quizzes</a>
+            @endauth
         </div>
         <div class="relative">
             @guest

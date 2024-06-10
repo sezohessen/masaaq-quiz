@@ -62,7 +62,7 @@ Route::middleware([
             ->name('quiz.')
             ->controller(QuizController::class)->group(function () {
                 Route::get('/start-quiz/{id}/{quiz:slug}', 'show')->name('show');
-                Route::get('/subscribe/{quiz}', 'subscribe')->name('subscribe');//TODO:post request
+                Route::get('/subscribe/{quiz}', 'subscribe')->name('subscribe');
                 Route::get('/begin-quiz/{link}', 'begin')->name('begin');
                 Route::post('/finish-quiz/{quiz_attempt}', 'finish')->name('finish');
                 Route::get('/result/{quiz_attempt}/{quiz:slug}', 'result')->name('result');

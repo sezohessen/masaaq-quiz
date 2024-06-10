@@ -4,6 +4,7 @@ namespace App\Http\Services\Tenant\Quiz;
 
 use App\Jobs\SendQuizLink;
 use App\Jobs\SendQuizReminder;
+use App\Jobs\SendQuizResult;
 use App\Models\Answer;
 use App\Models\Quiz;
 use App\Models\QuizAttempt;
@@ -61,8 +62,9 @@ class QuizService
     }
     public function begin($request, $link)
     {
-        if (!$subscribed = getAuth()->hasSubscribedQuiz($link)) {//TODO: Use policies
-            return abort(404);
+        $subscribed = getAuth()->hasSubscribedQuiz($link);
+        if (!$subscribed || getAuth()->hasFinishedQuizAttempt($link)) {
+            return redirect()->route('home');
         }
         if (!$subscribed->quiz?->isAvailableToStartNow()) {
             return redirect()
@@ -82,8 +84,13 @@ class QuizService
         // Store answers
         $totalScore = $this->storeAnswerers($request, $quiz, $quizAttempt);
         $this->updateQuizAttempt($quizAttempt, $totalScore, $quiz);
-
+        $this->sendQuizResult($quizAttempt);
         return redirect()->route('quiz.result', ['quiz_attempt' => $quizAttempt->id,'quiz' => $quiz->slug])->with('success', __('Quiz has been submitted successfully'));
+    }
+    public function sendQuizResult(QuizAttempt $quizAttempt)
+    {
+        $link = route('quiz.result',['quiz_attempt' => $quizAttempt?->id,'quiz' => $quizAttempt?->quiz?->slug]);
+        SendQuizResult::dispatch(getAuth(), $quizAttempt, $link);
     }
     public function result($request, QuizAttempt $quizAttempt)
     {

@@ -4,18 +4,19 @@ namespace App\Mail;
 
 use App\Models\Member;
 use App\Models\Quiz;
+use App\Models\QuizAttempt;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class MemberQuizLink extends Mailable
+class MemberQuizResult extends Mailable
 {
     use Queueable, SerializesModels;
 
     /**
      * Create a new message instance.
      */
-    public function __construct(public Member $member, public Quiz $quiz, public $link)
+    public function __construct(public Member $member, public QuizAttempt $quizAttempt,public $link)
     {
     }
 
@@ -26,6 +27,6 @@ class MemberQuizLink extends Mailable
      */
     public function build()
     {
-        return $this->subject(__('Quiz Link for :').$this->quiz?->title)->view('emails.quiz.link');
+        return $this->subject(__('Quiz result - '). $this->quizAttempt?->quiz?->title)->view('emails.quiz.result');
     }
 }

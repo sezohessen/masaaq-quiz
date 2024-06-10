@@ -43,6 +43,13 @@ class Member extends Authenticatable
         ->where('link',$routeLink)
         ->first();
     }
+    public function hasFinishedQuizAttempt($link)
+    {
+        return $this->attempts()
+        ->finished()
+        ->where('link',$link)
+        ->first();
+    }
     public function isClientOwner()
     {
         return false;

@@ -29,10 +29,12 @@ class QuizController extends Controller
     }
     public function finish(FinishQuizRequest $request, QuizAttempt $quizAttempt)
     {
+        $this->authorize('finish',$quizAttempt);
         return $this->quizService->finish($request, $quizAttempt);
     }
     public function result(Request $request, QuizAttempt $quizAttempt)
     {
+        $this->authorize('result',$quizAttempt);
         return $this->quizService->result($request, $quizAttempt);
     }
 }

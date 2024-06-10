@@ -1,0 +1,520 @@
+{
+	"info": {
+		"_postman_id": "a452da87-b539-4d65-8233-e617dcfd7896",
+		"name": "Massaq-Quiz",
+		"description": "### Postman Documentation for API Usage for Massaq-Quiz\n\n#### Base URL\n\n- **Central Domain Name**: `https://example.com/api/tenant/v1`\n- **API Version**: `/api/tenant/v1`\n    \n\n### Steps to Use in Postman\n\n1. **Set Up Environment Variables**:\n    - Create a new environment in Postman.\n    - Add the following variables:\n        - `domain`: `{example.com/api/tenant/v1}`\n        - `token`: `{token}` (initially empty)\n        - `X-Tenant : {tenant-id}`\n2. **Set Up Authorization and Headers**:\n    - For each request, ensure the following headers are set:\n        - `X-Tenant`: `{{tenantId}}`\n        - `Authorization`: `Bearer {{token}}` (for authenticated routes)\n\n### Headers\n\n#### Common Headers\n\n1. **X-Tenant**\n    - **Description**: Include this header to specify the tenant subdomain you want to access.\n    - Example : X-Tenant: f2174c22-d175-445b-97bd-7bd5d3844558\n2. **Authorization**\n    - **Description**: Include this header for authenticated routes. Use the Bearer token obtained from the login response.\n    - Example: Authorization: Bearer {token}\n\n### Endpoints\n\n#### 1\\. Login\n\n- **Endpoint**: `POST /login`\n- **Description**: Authenticates the user and returns a Bearer token.\n- **Headers**:\n    - `X-Tenant: {tenant-id}`\n\n#### 2\\. Register\n\n- **Endpoint**: `POST /register`\n- **Description**: Registers a new user and returns a Bearer token.\n- **Headers**:\n    - `X-Tenant: {tenant-id}`",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30766869"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Parse the JSON response",
+									"var jsonData = pm.response.json();",
+									"",
+									"// Check if the response is successful",
+									"if (jsonData.success && jsonData.data && jsonData.data.token) {",
+									"    // Set the token in the Postman environment variable",
+									"    pm.environment.set(\"token\", jsonData.data.token);",
+									"    console.log(\"Token has been set in the environment variable\");",
+									"} else {",
+									"    console.log(\"Failed to extract token from response\");",
+									"}",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-Tenant",
+								"value": "{{X-Tenant}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "member1@account.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{domain}}/login",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Failed",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Tenant",
+										"value": "f2174c22-d175-445b-97bd-7bd5d3844558",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "email",
+											"value": "test@test.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "password",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8000/api/tenant/v1/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"tenant",
+										"v1",
+										"login"
+									]
+								}
+							},
+							"status": "Unprocessable Content",
+							"code": 422,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.1"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 10 Jun 2024 19:52:45 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"These credentials do not match our records.\",\n    \"errors\": {\n        \"email\": [\n            \"These credentials do not match our records.\"\n        ]\n    }\n}"
+						},
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Tenant",
+										"value": "{{X-Tenant}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "email",
+											"value": "member1@account.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "password",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{domain}}/login",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.1"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 10 Jun 2024 20:39:35 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": {\n        \"user\": {\n            \"id\": 1,\n            \"name\": \"Member1\",\n            \"email\": \"member1@account.com\",\n            \"email_verified_at\": null,\n            \"google_access_token\": null,\n            \"created_at\": null,\n            \"updated_at\": null\n        },\n        \"token\": \"7|a2hSpUcBMYLiFiQCALtPHrFPCAg96ciNwSFMiDqP8e90b504\"\n    },\n    \"message\": \"Login successfully\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Register",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Parse the JSON response",
+									"var jsonData = pm.response.json();",
+									"",
+									"// Check if the response is successful",
+									"if (jsonData.success && jsonData.data && jsonData.data.token) {",
+									"    // Set the token in the Postman environment variable",
+									"    pm.environment.set(\"token\", jsonData.data.token);",
+									"    console.log(\"Token has been set in the environment variable\");",
+									"} else {",
+									"    console.log(\"Failed to extract token from response\");",
+									"}",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-Tenant",
+								"value": "{{X-Tenant}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "member2@account.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "password_confirmation",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "Member2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{domain}}/register",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Failed",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Tenant",
+										"value": "f2174c22-d175-445b-97bd-7bd5d3844558",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "email",
+											"value": "member1@account.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "password",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8000/api/tenant/v1/register",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"tenant",
+										"v1",
+										"register"
+									]
+								}
+							},
+							"status": "Unprocessable Content",
+							"code": 422,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.1"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 10 Jun 2024 20:40:07 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "58"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"The name field is required. (and 2 more errors)\",\n    \"errors\": {\n        \"name\": [\n            \"The name field is required.\"\n        ],\n        \"email\": [\n            \"The email has already been taken.\"\n        ],\n        \"password\": [\n            \"The password field confirmation does not match.\"\n        ]\n    }\n}"
+						},
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Tenant",
+										"value": "{{X-Tenant}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "email",
+											"value": "member2@account.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "password",
+											"type": "text"
+										},
+										{
+											"key": "password_confirmation",
+											"value": "password",
+											"type": "text"
+										},
+										{
+											"key": "name",
+											"value": "Member2",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{domain}}/register",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"register"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.1"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 10 Jun 2024 20:41:48 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "53"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": {\n        \"user\": {\n            \"id\": 4,\n            \"name\": \"Member2\",\n            \"email\": \"member2@account.com\",\n            \"email_verified_at\": null,\n            \"google_access_token\": null,\n            \"created_at\": \"2024-06-10T20:41:48.000000Z\",\n            \"updated_at\": \"2024-06-10T20:41:48.000000Z\"\n        },\n        \"token\": \"8|fqBXXlqCB58aK3RyszRJhx4O5E0OOtgjYSoVmK4ed1cf3d62\"\n    },\n    \"message\": \"Registered successfully\"\n}"
+						}
+					]
+				}
+			]
+		}
+	]
+}

@@ -34,5 +34,8 @@ Route::middleware([
     ->name('quiz.')
     ->controller(QuizController::class)->group(function () {
         Route::get('/get', 'get')->name('get');
+        Route::middleware(['auth:sanctum'])->group(function(){
+            Route::get('/show/{quiz}', 'show')->name('show');
+        });
     });
 });

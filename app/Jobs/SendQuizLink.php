@@ -24,6 +24,7 @@ class SendQuizLink implements ShouldQueue
         public string $link,
     )
     {
+        $this->onQueue('high');
     }
 
     /**

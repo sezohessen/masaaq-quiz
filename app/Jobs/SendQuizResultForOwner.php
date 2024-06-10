@@ -26,6 +26,7 @@ class SendQuizResultForOwner implements ShouldQueue
         public $link
     )
     {
+        $this->onQueue('low');
     }
 
     /**

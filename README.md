@@ -74,3 +74,5 @@ This application is multi-tenant, meaning that it can serve multiple clients wit
 
 ## Notes
 - You can use [tailwindcss](https://tailwindcss.com/) for the frontend, with its free UI kit [tailwindui](https://tailwindui.com/).
+## TODO:
+- on queue run : php artisan queue:work --queue=high,medium,low,default

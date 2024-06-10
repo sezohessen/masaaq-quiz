@@ -21,6 +21,7 @@ class SendQuizReminder implements ShouldQueue
      */
     public function __construct(public Member $member,public Quiz $quiz,public $link)
     {
+        $this->onQueue('medium');
     }
 
     /**

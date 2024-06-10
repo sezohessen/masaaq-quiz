@@ -16,30 +16,27 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
-<body class="font-sans antialiased">
+<body class="font-sans antialiased min-h-screen flex flex-col">
     <!-- Alerts -->
     <script>
         function showAlert(type, message) {
             Swal.fire({
-                icon: type
-                , title: message
-                , showConfirmButton: true
-                , timer: 900000000
+                icon: type,
+                title: message,
+                showConfirmButton: true,
+                timer: 900000000
             });
         }
-
     </script>
     @if(session('success'))
     <script>
         showAlert('success', `{{ session('success') }}`);
-
     </script>
     @endif
 
     @if(session('error'))
     <script>
         showAlert('error', `{{ session('error') }}`);
-
     </script>
     @endif
 
@@ -47,13 +44,17 @@
         @if($errors->any())
         showAlert('error', '<ul>@foreach ($errors->all() as $error)<li style="list-style-type: none">{{ $error }}</li>@endforeach</ul> <br>');
         @endif
-
     </script>
+
     @include('components.tenant.header')
 
-    @yield('content')
+    <!-- Main content area -->
+    <main class="flex-grow">
+        @yield('content')
+    </main>
 
     @include('components.tenant.footer')
+
     @yield('js')
     @stack('scripts')
 </body>

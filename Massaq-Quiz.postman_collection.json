@@ -515,6 +515,155 @@
 					]
 				}
 			]
+		},
+		{
+			"name": "Authenticated",
+			"item": [],
+			"description": "Requests that require auth tokens"
+		},
+		{
+			"name": "Unauthenticated",
+			"item": [
+				{
+					"name": "Quizzes",
+					"item": [
+						{
+							"name": "get",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Tenant",
+										"value": "{{X-Tenant}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{domain}}/quiz/get?perPage=5&type=0",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"quiz",
+										"get"
+									],
+									"query": [
+										{
+											"key": "perPage",
+											"value": "5"
+										},
+										{
+											"key": "search",
+											"value": "aliquid",
+											"disabled": true
+										},
+										{
+											"key": "type",
+											"value": "0",
+											"description": "0 => OutTimeType, 1 =>InTimeType"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Succes",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "X-Tenant",
+												"value": "{{X-Tenant}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": []
+										},
+										"url": {
+											"raw": "{{domain}}/quiz/get?perPage=5&type=0",
+											"host": [
+												"{{domain}}"
+											],
+											"path": [
+												"quiz",
+												"get"
+											],
+											"query": [
+												{
+													"key": "perPage",
+													"value": "5"
+												},
+												{
+													"key": "search",
+													"value": "aliquid",
+													"disabled": true
+												},
+												{
+													"key": "type",
+													"value": "0"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Host",
+											"value": "localhost:8000"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.3.1"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 10 Jun 2024 21:52:18 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "X-RateLimit-Limit",
+											"value": "60"
+										},
+										{
+											"key": "X-RateLimit-Remaining",
+											"value": "55"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"success\": true,\n    \"data\": {\n        \"data\": [\n            {\n                \"id\": 2,\n                \"title\": \"Corrupti proident\",\n                \"slug\": \"corrupti-proident\",\n                \"description\": \"Sunt pariatur In ip\",\n                \"quiz_type\": 0,\n                \"score\": 97,\n                \"number_of_questions\": 2,\n                \"start_time\": null,\n                \"end_time\": null,\n                \"isAvailableToStartNow\": true,\n                \"isEnded\": false\n            },\n            {\n                \"id\": 3,\n                \"title\": \"Iure ullamco sapient\",\n                \"slug\": \"iure-ullamco-sapient\",\n                \"description\": \"Autem ut illum exer\",\n                \"quiz_type\": 0,\n                \"score\": 101,\n                \"number_of_questions\": 2,\n                \"start_time\": null,\n                \"end_time\": null,\n                \"isAvailableToStartNow\": true,\n                \"isEnded\": false\n            },\n            {\n                \"id\": 6,\n                \"title\": \"Repudiandae consequa\",\n                \"slug\": \"repudiandae-consequa\",\n                \"description\": \"Corporis ut exercita\",\n                \"quiz_type\": 0,\n                \"score\": 140,\n                \"number_of_questions\": 2,\n                \"start_time\": null,\n                \"end_time\": null,\n                \"isAvailableToStartNow\": true,\n                \"isEnded\": false\n            },\n            {\n                \"id\": 7,\n                \"title\": \"Architecto voluptatu\",\n                \"slug\": \"architecto-voluptatu\",\n                \"description\": \"Dolorum mollit corru\",\n                \"quiz_type\": 0,\n                \"score\": 46,\n                \"number_of_questions\": 1,\n                \"start_time\": null,\n                \"end_time\": null,\n                \"isAvailableToStartNow\": true,\n                \"isEnded\": false\n            },\n            {\n                \"id\": 8,\n                \"title\": \"Aliquip labore elige\",\n                \"slug\": \"aliquip-labore-elige\",\n                \"description\": \"Non tempora excepteu\",\n                \"quiz_type\": 0,\n                \"score\": 76,\n                \"number_of_questions\": 1,\n                \"start_time\": null,\n                \"end_time\": null,\n                \"isAvailableToStartNow\": true,\n                \"isEnded\": false\n            }\n        ],\n        \"meta\": {\n            \"current_page\": 1,\n            \"last_page\": 2,\n            \"per_page\": 5,\n            \"hasMorePages\": true,\n            \"total\": 7\n        },\n        \"links\": {\n            \"first\": \"http://localhost:8000/api/tenant/v1/quiz/get?page=1\",\n            \"last\": \"http://localhost:8000/api/tenant/v1/quiz/get?page=2\",\n            \"next\": \"http://localhost:8000/api/tenant/v1/quiz/get?page=2\",\n            \"prev\": null\n        }\n    },\n    \"message\": \"Quizzes\"\n}"
+								}
+							]
+						}
+					]
+				}
+			],
+			"description": "Requests that does not require auth tokens"
 		}
 	]
 }

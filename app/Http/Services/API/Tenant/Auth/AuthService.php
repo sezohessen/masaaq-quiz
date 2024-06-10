@@ -4,7 +4,7 @@ namespace App\Http\Services\API\Tenant\Auth;
 use App\Traits\ApiHelpersTrait;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Services\Tenant\Auth\RegisterService;
-use App\Http\Resources\API\Tenant\Member\MemberResource;
+use App\Http\Resources\MemberResource;
 
 class AuthService
 {

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\Tenant\Auth\AuthController;
+use App\Http\Controllers\API\Tenant\Quiz\QuizController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Stancl\Tenancy\Middleware\InitializeTenancyByRequestData;
@@ -28,5 +29,10 @@ Route::middleware([
     Route::middleware('guest')->group(function () {
         Route::post('login', [AuthController::class, 'login']);
         Route::post('register', [AuthController::class, 'register']);
+    });
+    Route::prefix('quiz')
+    ->name('quiz.')
+    ->controller(QuizController::class)->group(function () {
+        Route::get('/get', 'get')->name('get');
     });
 });

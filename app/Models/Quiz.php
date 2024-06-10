@@ -98,5 +98,19 @@ class Quiz extends Model
 
         return gmdate('H:i:s', $averageTimeInSeconds);
     }
+    /* Scopes */
+    public function scopeWhenSearch($query, $search)
+    {
+        return $query->when($search != null, function ($q) use ($search) {
+            return $q->where('title', 'LIKE', '%' . $search . '%')
+                ->orWhere('description', 'LIKE', '%' . $search . '%');
+        });
+    }
+    public function scopeWhenType($query, $type)
+    {
+        return $query->when($type != null, function ($q) use ($type) {
+            return $q->where('quiz_type',$type);
+        });
+    }
 
 }

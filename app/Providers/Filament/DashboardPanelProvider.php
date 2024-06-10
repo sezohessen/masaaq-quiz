@@ -58,6 +58,9 @@ class DashboardPanelProvider extends PanelProvider
                 Authenticate::class,
                 ClientOwner::class
             ])
+            ->tenantMiddleware([
+                'client_owner'
+            ])
             ->authGuard('web');//TODO: why login dashboard for user model not member model ?
     }
 }

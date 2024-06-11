@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Services\API\Tenant\Quiz;
+use App\Http\Resources\Collection\QuizAttemptCollection;
 use App\Http\Resources\Collection\QuizCollection;
+use App\Http\Resources\QuizAttemptResource;
 use App\Http\Resources\QuizResource;
 use App\Models\Quiz;
 use App\Models\QuizAttempt;
@@ -50,10 +52,29 @@ class QuizService
         $attempt = $this->quizService->handleFinishedQuiz($request, $quizAttempt);
         return $this->success('Quiz has been submitted successfully',$attempt);
     }
+    public function result($request,QuizAttempt $quizAttempt)
+    {
+        $quizAttempt->load(['answers','answers.question','answers.choice','quiz','quiz.questions','quiz.questions.choices']);
+        return $this->success('Result',new QuizAttemptResource($quizAttempt));
+    }
+    public function attempts($request)
+    {
+        $attempts = $this->getAttempts($request);
+        return $this->success('Result',new QuizAttemptCollection($attempts));
+    }
     public function getQuizzes($request)
     {
-        return Quiz::whenSearch($request['search'])
+        return Quiz::orderBy('id','desc')
+        ->whenSearch($request['search'])
         ->whenType($request['type'])
+        ->paginate($request['perPage'] ?? config('application.perPage',10));
+    }
+    public function getAttempts($request)
+    {
+        return QuizAttempt::orderBy('id','desc')
+        ->with(['quiz'])
+        ->whenSearch($request['search'] ?? null)
+        ->whenFinished($request['finished'] ?? null)
         ->paginate($request['perPage'] ?? config('application.perPage',10));
     }
 

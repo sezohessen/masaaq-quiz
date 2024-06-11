@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class QuestionResource extends JsonResource
+class QuizAttemptResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,12 +16,16 @@ class QuestionResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'question' => $this->question,
-            'slug' => $this->slug,
-            'description' => $this->description,
             'score' => $this->score,
+            'passed' => $this->passed,
+            'link' => $this->link,
+            'start_time' => $this->start_time,
+            'end_time' => $this->end_time,
+            'has_finished' => $this->has_finished,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
             'quiz' => new QuizResource($this->whenLoaded('quiz')),
-            'choices' => ChoiceResource::collection($this->whenLoaded('choices')),
+            'answers' => AnswerResource::collection($this->whenLoaded('answers')),
         ];
     }
 }

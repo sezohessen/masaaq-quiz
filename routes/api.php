@@ -39,6 +39,8 @@ Route::middleware([
             Route::post('/subscribe/{quiz}', 'subscribe')->name('subscribe');
             Route::get('/begin-quiz/{link}', 'begin')->name('begin');
             Route::post('/finish-quiz/{quiz_attempt}', 'finish')->name('finish');
+            Route::get('/result/{quiz_attempt}','result')->name('result');
+            Route::get('/attempts','attempts')->name('attempts');
         });
     });
 });

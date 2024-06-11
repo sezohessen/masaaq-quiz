@@ -33,4 +33,12 @@ class QuizController extends Controller
     {
         return $this->quizService->finish($request,$quizAttempt);
     }
+    public function result(Request $request, QuizAttempt $quizAttempt)
+    {
+        return $this->quizService->result($request,$quizAttempt);
+    }
+    public function attempts(Request $request)
+    {
+        return $this->quizService->attempts($request);
+    }
 }

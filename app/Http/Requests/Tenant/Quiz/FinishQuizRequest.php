@@ -14,6 +14,11 @@ class FinishQuizRequest extends FormRequest
     public function rules()
     {
         return [
+            'answers' => ['required','array',function($att,$val,$fail){
+                if($this->quiz_attempt?->has_finished){
+                    $fail('You already finished the quiz');
+                }
+            }],
             'answers.*' => 'required|exists:choices,id',
         ];
     }

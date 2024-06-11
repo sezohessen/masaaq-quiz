@@ -4,6 +4,7 @@ namespace App\Http\Services\API\Tenant\Quiz;
 use App\Http\Resources\Collection\QuizCollection;
 use App\Http\Resources\QuizResource;
 use App\Models\Quiz;
+use App\Models\QuizAttempt;
 use App\Traits\ApiHelpersTrait;
 use App\Http\Services\Tenant\Quiz\QuizService as TenantQuizService;
 class QuizService
@@ -43,6 +44,11 @@ class QuizService
             'quiz' => new QuizResource($quiz),
             'attempt' => $attempt
         ]);
+    }
+    public function finish($request,QuizAttempt $quizAttempt)
+    {
+        $attempt = $this->quizService->handleFinishedQuiz($request, $quizAttempt);
+        return $this->success('Quiz has been submitted successfully',$attempt);
     }
     public function getQuizzes($request)
     {

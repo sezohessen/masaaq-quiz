@@ -83,14 +83,17 @@ class QuizService
     }
     public function finish($request, QuizAttempt $quizAttempt)
     {
+        $this->handleFinishedQuiz($request, $quizAttempt);
+        return redirect()->route('quiz.result', ['quiz_attempt' => $quizAttempt->id,'quiz' => $quizAttempt->quiz?->slug])->with('success', __('Quiz has been submitted successfully'));
+    }
+    public function handleFinishedQuiz($request, $quizAttempt)
+    {
         $quiz = $quizAttempt->quiz()->with('questions.choices')->first();
-
-        // Store answers
         $totalScore = $this->storeAnswerers($request, $quiz, $quizAttempt);
         $this->updateQuizAttempt($quizAttempt, $totalScore, $quiz);
         $this->sendQuizResult($quizAttempt);
         $this->sendQuizResultForOwner($quizAttempt);
-        return redirect()->route('quiz.result', ['quiz_attempt' => $quizAttempt->id,'quiz' => $quiz->slug])->with('success', __('Quiz has been submitted successfully'));
+        return $quizAttempt->refresh();
     }
     public function sendQuizResult(QuizAttempt $quizAttempt)
     {

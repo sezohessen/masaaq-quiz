@@ -37,6 +37,7 @@ Route::middleware([
         Route::middleware(['auth:sanctum'])->group(function(){
             Route::get('/show/{quiz}', 'show')->name('show');
             Route::post('/subscribe/{quiz}', 'subscribe')->name('subscribe');
+            Route::get('/begin-quiz/{link}', 'begin')->name('begin');
         });
     });
 });

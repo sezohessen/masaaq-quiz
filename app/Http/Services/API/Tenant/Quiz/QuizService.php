@@ -9,6 +9,9 @@ use App\Http\Services\Tenant\Quiz\QuizService as TenantQuizService;
 class QuizService
 {
     use ApiHelpersTrait;
+    public function __construct(public TenantQuizService $quizService)
+    {
+    }
     public function get($request)
     {
         $quizzes = $this->getQuizzes($request);
@@ -23,9 +26,23 @@ class QuizService
         if ($quiz->isEnded()) {
             return $this->sendError('Quiz is ended');
         }
-        $quizService = new TenantQuizService();
-        $quizService->handleSubscribeQuiz($quiz);
+
+        $this->quizService->handleSubscribeQuiz($quiz);
         return $this->success('You have subscribed for the quiz. You can start the quiz through the link that was sent via email.');
+    }
+    public function begin($request,$link)
+    {
+        $subscribed = getAuth()->hasSubscribedQuiz($link);
+        if (!$subscribed || getAuth()->hasFinishedQuizAttempt($link) || !$subscribed->quiz?->isAvailableToStartNow()) {
+            return $this->sendError('Quiz is not available for now.');
+        }
+        $attempt = $this->quizService->insertAttempt($subscribed, $link);
+        $quiz = $subscribed->quiz;
+        $quiz->load('questions', 'questions.choices');
+        return $this->success('Quiz',[
+            'quiz' => new QuizResource($quiz),
+            'attempt' => $attempt
+        ]);
     }
     public function getQuizzes($request)
     {

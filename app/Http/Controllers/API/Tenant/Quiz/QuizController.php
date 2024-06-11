@@ -23,4 +23,8 @@ class QuizController extends Controller
     {
         return $this->quizService->subscribe($request,$quiz);
     }
+    public function begin(Request $request, $link)
+    {
+        return $this->quizService->begin($request,$link);
+    }
 }

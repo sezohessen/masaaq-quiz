@@ -518,7 +518,1090 @@
 		},
 		{
 			"name": "Authenticated",
-			"item": [],
+			"item": [
+				{
+					"name": "Quiz",
+					"item": [
+						{
+							"name": "Attempts",
+							"item": [
+								{
+									"name": "show",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [
+											{
+												"key": "X-Tenant",
+												"value": "{{X-Tenant}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": []
+										},
+										"url": {
+											"raw": "{{domain}}/quiz/result/13",
+											"host": [
+												"{{domain}}"
+											],
+											"path": [
+												"quiz",
+												"result",
+												"13"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "X-Tenant",
+														"value": "{{X-Tenant}}",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "formdata",
+													"formdata": []
+												},
+												"url": {
+													"raw": "{{domain}}/quiz/result/13",
+													"host": [
+														"{{domain}}"
+													],
+													"path": [
+														"quiz",
+														"result",
+														"13"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Host",
+													"value": "localhost:8000"
+												},
+												{
+													"key": "Connection",
+													"value": "close"
+												},
+												{
+													"key": "X-Powered-By",
+													"value": "PHP/8.3.1"
+												},
+												{
+													"key": "Cache-Control",
+													"value": "no-cache, private"
+												},
+												{
+													"key": "Date",
+													"value": "Tue, 11 Jun 2024 02:32:33 GMT"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												},
+												{
+													"key": "X-RateLimit-Limit",
+													"value": "60"
+												},
+												{
+													"key": "X-RateLimit-Remaining",
+													"value": "58"
+												},
+												{
+													"key": "Access-Control-Allow-Origin",
+													"value": "*"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"success\": true,\n    \"data\": {\n        \"id\": 13,\n        \"score\": \"49.00\",\n        \"passed\": 0,\n        \"link\": \"YFnZdLBXiu\",\n        \"start_time\": \"2024-06-11T00:10:53.000000Z\",\n        \"end_time\": \"2024-06-11T00:38:57.000000Z\",\n        \"has_finished\": 1,\n        \"created_at\": \"2024-06-11T00:10:53.000000Z\",\n        \"updated_at\": \"2024-06-11T00:38:57.000000Z\",\n        \"quiz\": {\n            \"id\": 3,\n            \"title\": \"Iure ullamco sapient\",\n            \"slug\": \"iure-ullamco-sapient\",\n            \"description\": \"Autem ut illum exer\",\n            \"quiz_type\": 0,\n            \"score\": 101,\n            \"number_of_questions\": 2,\n            \"start_time\": null,\n            \"end_time\": null,\n            \"isAvailableToStartNow\": true,\n            \"isEnded\": false,\n            \"questions\": [\n                {\n                    \"id\": 11,\n                    \"question\": \"Sit voluptatem labo\",\n                    \"slug\": \"sit-voluptatem-labo\",\n                    \"description\": \"Et fugiat vitae mol\",\n                    \"score\": \"49.00\",\n                    \"choices\": [\n                        {\n                            \"id\": 21,\n                            \"title\": \"Ut voluptatem Sunt\",\n                            \"is_correct\": 1,\n                            \"order\": 56,\n                            \"description\": \"Nihil beatae Nam eni\"\n                        },\n                        {\n                            \"id\": 22,\n                            \"title\": \"In est sit et ut nos\",\n                            \"is_correct\": 0,\n                            \"order\": 51,\n                            \"description\": \"Neque est ad fugiat\"\n                        }\n                    ]\n                },\n                {\n                    \"id\": 15,\n                    \"question\": \"Mollitia ut repellen\",\n                    \"slug\": \"mollitia-ut-repellen\",\n                    \"description\": \"Commodi illo eu aute\",\n                    \"score\": \"52.00\",\n                    \"choices\": [\n                        {\n                            \"id\": 29,\n                            \"title\": \"Quo ut qui in nulla\",\n                            \"is_correct\": 1,\n                            \"order\": 58,\n                            \"description\": \"Tenetur tenetur offi\"\n                        },\n                        {\n                            \"id\": 30,\n                            \"title\": \"Ea aut id in nisi i\",\n                            \"is_correct\": 0,\n                            \"order\": 86,\n                            \"description\": \"Nulla iste labore te\"\n                        }\n                    ]\n                }\n            ]\n        },\n        \"answers\": [\n            {\n                \"id\": 50,\n                \"is_correct\": 1,\n                \"question\": {\n                    \"id\": 11,\n                    \"question\": \"Sit voluptatem labo\",\n                    \"slug\": \"sit-voluptatem-labo\",\n                    \"description\": \"Et fugiat vitae mol\",\n                    \"score\": \"49.00\"\n                },\n                \"choice\": {\n                    \"id\": 21,\n                    \"title\": \"Ut voluptatem Sunt\",\n                    \"is_correct\": 1,\n                    \"order\": 56,\n                    \"description\": \"Nihil beatae Nam eni\"\n                }\n            },\n            {\n                \"id\": 51,\n                \"is_correct\": 0,\n                \"question\": {\n                    \"id\": 15,\n                    \"question\": \"Mollitia ut repellen\",\n                    \"slug\": \"mollitia-ut-repellen\",\n                    \"description\": \"Commodi illo eu aute\",\n                    \"score\": \"52.00\"\n                },\n                \"choice\": {\n                    \"id\": 30,\n                    \"title\": \"Ea aut id in nisi i\",\n                    \"is_correct\": 0,\n                    \"order\": 86,\n                    \"description\": \"Nulla iste labore te\"\n                }\n            }\n        ]\n    },\n    \"message\": \"Result\"\n}"
+										}
+									]
+								},
+								{
+									"name": "get",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [
+											{
+												"key": "X-Tenant",
+												"value": "{{X-Tenant}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": []
+										},
+										"url": {
+											"raw": "{{domain}}/quiz/attempts?finished=0&search=UJFZczQI9h&perPage=10",
+											"host": [
+												"{{domain}}"
+											],
+											"path": [
+												"quiz",
+												"attempts"
+											],
+											"query": [
+												{
+													"key": "finished",
+													"value": "0",
+													"description": "0 or 1"
+												},
+												{
+													"key": "search",
+													"value": "UJFZczQI9h",
+													"description": "quiz title, description , link"
+												},
+												{
+													"key": "perPage",
+													"value": "10"
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "success",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "X-Tenant",
+														"value": "{{X-Tenant}}",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "formdata",
+													"formdata": []
+												},
+												"url": {
+													"raw": "{{domain}}/quiz/attempts?finished=0&search=UJFZczQI9h&perPage=10",
+													"host": [
+														"{{domain}}"
+													],
+													"path": [
+														"quiz",
+														"attempts"
+													],
+													"query": [
+														{
+															"key": "finished",
+															"value": "0",
+															"description": "0 or 1"
+														},
+														{
+															"key": "search",
+															"value": "UJFZczQI9h",
+															"description": "quiz title, description , link"
+														},
+														{
+															"key": "perPage",
+															"value": "10"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Host",
+													"value": "localhost:8000"
+												},
+												{
+													"key": "Connection",
+													"value": "close"
+												},
+												{
+													"key": "X-Powered-By",
+													"value": "PHP/8.3.1"
+												},
+												{
+													"key": "Cache-Control",
+													"value": "no-cache, private"
+												},
+												{
+													"key": "Date",
+													"value": "Tue, 11 Jun 2024 02:44:34 GMT"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												},
+												{
+													"key": "X-RateLimit-Limit",
+													"value": "60"
+												},
+												{
+													"key": "X-RateLimit-Remaining",
+													"value": "56"
+												},
+												{
+													"key": "Access-Control-Allow-Origin",
+													"value": "*"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"success\": true,\n    \"data\": {\n        \"data\": [\n            {\n                \"id\": 12,\n                \"score\": null,\n                \"passed\": 0,\n                \"link\": \"UJFZczQI9h\",\n                \"start_time\": \"2024-06-11T00:09:07.000000Z\",\n                \"end_time\": null,\n                \"has_finished\": 0,\n                \"created_at\": \"2024-06-11T00:09:07.000000Z\",\n                \"updated_at\": \"2024-06-11T00:09:07.000000Z\",\n                \"quiz\": {\n                    \"id\": 6,\n                    \"title\": \"Repudiandae consequa\",\n                    \"slug\": \"repudiandae-consequa\",\n                    \"description\": \"Corporis ut exercita\",\n                    \"quiz_type\": 0,\n                    \"score\": 140,\n                    \"number_of_questions\": 2,\n                    \"start_time\": null,\n                    \"end_time\": null,\n                    \"isAvailableToStartNow\": true,\n                    \"isEnded\": false\n                }\n            }\n        ],\n        \"meta\": {\n            \"current_page\": 1,\n            \"last_page\": 1,\n            \"per_page\": 10,\n            \"hasMorePages\": false,\n            \"total\": 1\n        },\n        \"links\": {\n            \"first\": \"http://localhost:8000/api/tenant/v1/quiz/attempts?page=1\",\n            \"last\": \"http://localhost:8000/api/tenant/v1/quiz/attempts?page=1\",\n            \"next\": null,\n            \"prev\": null\n        }\n    },\n    \"message\": \"Result\"\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "show",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Tenant",
+										"value": "{{X-Tenant}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{domain}}/quiz/show/2",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"quiz",
+										"show",
+										"2"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Succes",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "X-Tenant",
+												"value": "f2174c22-d175-445b-97bd-7bd5d3844558",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": []
+										},
+										"url": {
+											"raw": "http://localhost:8000/api/tenant/v1/quiz/get?perPage=5&type=0",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8000",
+											"path": [
+												"api",
+												"tenant",
+												"v1",
+												"quiz",
+												"get"
+											],
+											"query": [
+												{
+													"key": "perPage",
+													"value": "5"
+												},
+												{
+													"key": "search",
+													"value": "aliquid",
+													"disabled": true
+												},
+												{
+													"key": "type",
+													"value": "0"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Host",
+											"value": "localhost:8000"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.3.1"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 10 Jun 2024 21:52:18 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "X-RateLimit-Limit",
+											"value": "60"
+										},
+										{
+											"key": "X-RateLimit-Remaining",
+											"value": "55"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"success\": true,\n    \"data\": {\n        \"data\": [\n            {\n                \"id\": 2,\n                \"title\": \"Corrupti proident\",\n                \"slug\": \"corrupti-proident\",\n                \"description\": \"Sunt pariatur In ip\",\n                \"quiz_type\": 0,\n                \"score\": 97,\n                \"number_of_questions\": 2,\n                \"start_time\": null,\n                \"end_time\": null,\n                \"isAvailableToStartNow\": true,\n                \"isEnded\": false\n            },\n            {\n                \"id\": 3,\n                \"title\": \"Iure ullamco sapient\",\n                \"slug\": \"iure-ullamco-sapient\",\n                \"description\": \"Autem ut illum exer\",\n                \"quiz_type\": 0,\n                \"score\": 101,\n                \"number_of_questions\": 2,\n                \"start_time\": null,\n                \"end_time\": null,\n                \"isAvailableToStartNow\": true,\n                \"isEnded\": false\n            },\n            {\n                \"id\": 6,\n                \"title\": \"Repudiandae consequa\",\n                \"slug\": \"repudiandae-consequa\",\n                \"description\": \"Corporis ut exercita\",\n                \"quiz_type\": 0,\n                \"score\": 140,\n                \"number_of_questions\": 2,\n                \"start_time\": null,\n                \"end_time\": null,\n                \"isAvailableToStartNow\": true,\n                \"isEnded\": false\n            },\n            {\n                \"id\": 7,\n                \"title\": \"Architecto voluptatu\",\n                \"slug\": \"architecto-voluptatu\",\n                \"description\": \"Dolorum mollit corru\",\n                \"quiz_type\": 0,\n                \"score\": 46,\n                \"number_of_questions\": 1,\n                \"start_time\": null,\n                \"end_time\": null,\n                \"isAvailableToStartNow\": true,\n                \"isEnded\": false\n            },\n            {\n                \"id\": 8,\n                \"title\": \"Aliquip labore elige\",\n                \"slug\": \"aliquip-labore-elige\",\n                \"description\": \"Non tempora excepteu\",\n                \"quiz_type\": 0,\n                \"score\": 76,\n                \"number_of_questions\": 1,\n                \"start_time\": null,\n                \"end_time\": null,\n                \"isAvailableToStartNow\": true,\n                \"isEnded\": false\n            }\n        ],\n        \"meta\": {\n            \"current_page\": 1,\n            \"last_page\": 2,\n            \"per_page\": 5,\n            \"hasMorePages\": true,\n            \"total\": 7\n        },\n        \"links\": {\n            \"first\": \"http://localhost:8000/api/tenant/v1/quiz/get?page=1\",\n            \"last\": \"http://localhost:8000/api/tenant/v1/quiz/get?page=2\",\n            \"next\": \"http://localhost:8000/api/tenant/v1/quiz/get?page=2\",\n            \"prev\": null\n        }\n    },\n    \"message\": \"Quizzes\"\n}"
+								}
+							]
+						},
+						{
+							"name": "begin",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Tenant",
+										"value": "{{X-Tenant}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{domain}}/quiz/begin-quiz/YFnZdLBXiu",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"quiz",
+										"begin-quiz",
+										"YFnZdLBXiu"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Failed",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "X-Tenant",
+												"value": "{{X-Tenant}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": []
+										},
+										"url": {
+											"raw": "{{domain}}/quiz/begin-quiz/QQQQQQ",
+											"host": [
+												"{{domain}}"
+											],
+											"path": [
+												"quiz",
+												"begin-quiz",
+												"QQQQQQ"
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Host",
+											"value": "localhost:8000"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.3.1"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 11 Jun 2024 00:00:38 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "X-RateLimit-Limit",
+											"value": "60"
+										},
+										{
+											"key": "X-RateLimit-Remaining",
+											"value": "59"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"success\": false,\n    \"message\": \"Quiz has been finished\"\n}"
+								},
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "X-Tenant",
+												"value": "{{X-Tenant}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": []
+										},
+										"url": {
+											"raw": "{{domain}}/quiz/begin-quiz/YFnZdLBXiu",
+											"host": [
+												"{{domain}}"
+											],
+											"path": [
+												"quiz",
+												"begin-quiz",
+												"YFnZdLBXiu"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Host",
+											"value": "localhost:8000"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.3.1"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 11 Jun 2024 00:10:53 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "X-RateLimit-Limit",
+											"value": "60"
+										},
+										{
+											"key": "X-RateLimit-Remaining",
+											"value": "58"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"success\": true,\n    \"data\": {\n        \"quiz\": {\n            \"id\": 3,\n            \"title\": \"Iure ullamco sapient\",\n            \"slug\": \"iure-ullamco-sapient\",\n            \"description\": \"Autem ut illum exer\",\n            \"quiz_type\": 0,\n            \"score\": 101,\n            \"number_of_questions\": 2,\n            \"start_time\": null,\n            \"end_time\": null,\n            \"isAvailableToStartNow\": true,\n            \"isEnded\": false,\n            \"questions\": [\n                {\n                    \"question\": \"Sit voluptatem labo\",\n                    \"slug\": \"sit-voluptatem-labo\",\n                    \"description\": \"Et fugiat vitae mol\",\n                    \"score\": \"49.00\",\n                    \"choices\": [\n                        {\n                            \"id\": 21,\n                            \"title\": \"Ut voluptatem Sunt\",\n                            \"is_correct\": 1,\n                            \"order\": 56,\n                            \"description\": \"Nihil beatae Nam eni\"\n                        },\n                        {\n                            \"id\": 22,\n                            \"title\": \"In est sit et ut nos\",\n                            \"is_correct\": 0,\n                            \"order\": 51,\n                            \"description\": \"Neque est ad fugiat\"\n                        }\n                    ]\n                },\n                {\n                    \"question\": \"Mollitia ut repellen\",\n                    \"slug\": \"mollitia-ut-repellen\",\n                    \"description\": \"Commodi illo eu aute\",\n                    \"score\": \"52.00\",\n                    \"choices\": [\n                        {\n                            \"id\": 29,\n                            \"title\": \"Quo ut qui in nulla\",\n                            \"is_correct\": 1,\n                            \"order\": 58,\n                            \"description\": \"Tenetur tenetur offi\"\n                        },\n                        {\n                            \"id\": 30,\n                            \"title\": \"Ea aut id in nisi i\",\n                            \"is_correct\": 0,\n                            \"order\": 86,\n                            \"description\": \"Nulla iste labore te\"\n                        }\n                    ]\n                }\n            ]\n        },\n        \"attempt\": {\n            \"quiz_id\": 3,\n            \"link\": \"YFnZdLBXiu\",\n            \"start_time\": \"2024-06-11T00:10:53.000000Z\",\n            \"member_id\": 1,\n            \"updated_at\": \"2024-06-11T00:10:53.000000Z\",\n            \"created_at\": \"2024-06-11T00:10:53.000000Z\",\n            \"id\": 13\n        }\n    },\n    \"message\": \"Quiz\"\n}"
+								}
+							]
+						},
+						{
+							"name": "finish",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Tenant",
+										"value": "{{X-Tenant}}",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "answers[11]",
+											"value": "21",
+											"description": "key is question id, value is the choice id",
+											"type": "text"
+										},
+										{
+											"key": "answers[15]",
+											"value": "30",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{domain}}/quiz/finish-quiz/13",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"quiz",
+										"finish-quiz",
+										"13"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "failed",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "X-Tenant",
+												"value": "{{X-Tenant}}",
+												"type": "text"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": []
+										},
+										"url": {
+											"raw": "{{domain}}/quiz/finish-quiz/13",
+											"host": [
+												"{{domain}}"
+											],
+											"path": [
+												"quiz",
+												"finish-quiz",
+												"13"
+											]
+										}
+									},
+									"status": "Unprocessable Content",
+									"code": 422,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Host",
+											"value": "localhost:8000"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.3.1"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 11 Jun 2024 00:32:27 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "X-RateLimit-Limit",
+											"value": "60"
+										},
+										{
+											"key": "X-RateLimit-Remaining",
+											"value": "59"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": \"The answers field is required.\",\n    \"errors\": {\n        \"answers\": [\n            \"The answers field is required.\"\n        ]\n    }\n}"
+								},
+								{
+									"name": "success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "X-Tenant",
+												"value": "{{X-Tenant}}",
+												"type": "text"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "answers[11]",
+													"value": "21",
+													"description": "key is question id, value is the choice id",
+													"type": "text"
+												},
+												{
+													"key": "answers[15]",
+													"value": "30",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{domain}}/quiz/finish-quiz/13",
+											"host": [
+												"{{domain}}"
+											],
+											"path": [
+												"quiz",
+												"finish-quiz",
+												"13"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Host",
+											"value": "localhost:8000"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.3.1"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 11 Jun 2024 00:34:41 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "X-RateLimit-Limit",
+											"value": "60"
+										},
+										{
+											"key": "X-RateLimit-Remaining",
+											"value": "59"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"success\": true,\n    \"data\": {\n        \"id\": 13,\n        \"member_id\": 1,\n        \"quiz_id\": 3,\n        \"created_at\": \"2024-06-11T00:10:53.000000Z\",\n        \"updated_at\": \"2024-06-11T00:34:41.000000Z\",\n        \"score\": \"49.00\",\n        \"passed\": 0,\n        \"link\": \"YFnZdLBXiu\",\n        \"start_time\": \"2024-06-11T00:10:53.000000Z\",\n        \"end_time\": \"2024-06-11T00:34:41.000000Z\",\n        \"has_finished\": 1,\n        \"quiz\": {\n            \"id\": 3,\n            \"tenant_id\": \"f2174c22-d175-445b-97bd-7bd5d3844558\",\n            \"title\": \"Iure ullamco sapient\",\n            \"slug\": \"iure-ullamco-sapient\",\n            \"description\": \"Autem ut illum exer\",\n            \"created_at\": \"2024-06-05T19:06:05.000000Z\",\n            \"updated_at\": \"2024-06-05T19:06:05.000000Z\",\n            \"quiz_type\": 0,\n            \"start_time\": null,\n            \"end_time\": null,\n            \"score\": 101,\n            \"number_of_questions\": 2\n        }\n    },\n    \"message\": \"Quiz has been submitted successfully\"\n}"
+								},
+								{
+									"name": "failed already finished",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "X-Tenant",
+												"value": "{{X-Tenant}}",
+												"type": "text"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "answers[11]",
+													"value": "21",
+													"description": "key is question id, value is the choice id",
+													"type": "text"
+												},
+												{
+													"key": "answers[15]",
+													"value": "30",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{domain}}/quiz/finish-quiz/13",
+											"host": [
+												"{{domain}}"
+											],
+											"path": [
+												"quiz",
+												"finish-quiz",
+												"13"
+											]
+										}
+									},
+									"status": "Unprocessable Content",
+									"code": 422,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Host",
+											"value": "localhost:8000"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.3.1"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 11 Jun 2024 00:40:30 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "X-RateLimit-Limit",
+											"value": "60"
+										},
+										{
+											"key": "X-RateLimit-Remaining",
+											"value": "58"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": \"You already finished the quiz\",\n    \"errors\": {\n        \"answers\": [\n            \"You already finished the quiz\"\n        ]\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "subscribe",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Tenant",
+										"value": "{{X-Tenant}}",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{domain}}/quiz/subscribe/5",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"quiz",
+										"subscribe",
+										"5"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Failed",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "X-Tenant",
+												"value": "{{X-Tenant}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": []
+										},
+										"url": {
+											"raw": "{{domain}}/quiz/subscribe/11",
+											"host": [
+												"{{domain}}"
+											],
+											"path": [
+												"quiz",
+												"subscribe",
+												"11"
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Host",
+											"value": "localhost:8000"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.3.1"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 10 Jun 2024 23:53:12 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "X-RateLimit-Limit",
+											"value": "60"
+										},
+										{
+											"key": "X-RateLimit-Remaining",
+											"value": "59"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"success\": false,\n    \"message\": \"Quiz is ended\"\n}"
+								},
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "X-Tenant",
+												"value": "{{X-Tenant}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": []
+										},
+										"url": {
+											"raw": "{{domain}}/quiz/subscribe/5",
+											"host": [
+												"{{domain}}"
+											],
+											"path": [
+												"quiz",
+												"subscribe",
+												"5"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Host",
+											"value": "localhost:8000"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.3.1"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 10 Jun 2024 23:53:50 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "X-RateLimit-Limit",
+											"value": "60"
+										},
+										{
+											"key": "X-RateLimit-Remaining",
+											"value": "58"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"success\": true,\n    \"data\": null,\n    \"message\": \"You have subscribed for the quiz. You can start the quiz through the link that was sent via email.\"\n}"
+								}
+							]
+						}
+					]
+				}
+			],
 			"description": "Requests that require auth tokens"
 		},
 		{

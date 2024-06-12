@@ -32,7 +32,7 @@ class AuthenticatedSessionController extends Controller
         if ($tenant = auth()->user()->client) {//TODO: improve redirect
             return redirect($this->redirectToTenant($tenant));
         }
-        return redirect()->intended(RouteServiceProvider::HOME);
+        return redirect()->intended(RouteServiceProvider::DASHBOARD);
     }
     public function redirectToTenant($tenant)
     {

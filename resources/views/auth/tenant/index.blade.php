@@ -14,7 +14,7 @@
                         <input type="text" value="{{ request('search') }}" placeholder="{{ __('By name, email, domain') }}" name="search" class="w-48 p-2 border border-gray-300 rounded-md" />
                         <button type="submit" class="px-4 py-2 bg-gray-700 text-white rounded-md">{{ __('Filter') }}</button>
                     </form>
-                    <a href="{{ route('tenants.create') }}" class="px-4 py-2 bg-green-600 text-white rounded-md flex items-center" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover" title="{{ __('Add') }}">
+                    <a href="{{ route('dashboard.tenants.create') }}" class="px-4 py-2 bg-green-600 text-white rounded-md flex items-center" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover" title="{{ __('Add') }}">
                         <span class="mr-2">
                             <i class="fa fa-plus"></i>
                         </span>

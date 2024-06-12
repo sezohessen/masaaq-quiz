@@ -13,7 +13,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('choices', function (Blueprint $table) {
-            $table->dropForeignIdFor(Tenant::class);
+            $table->dropForeignSafe('tenant_id');
             $table->dropColumn(['tenant_id']);
         });
     }

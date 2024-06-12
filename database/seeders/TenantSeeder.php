@@ -10,7 +10,7 @@ class TenantSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-    public function run(): void
+    public function run()
     {
 
         $client = $this->createUser();
@@ -21,6 +21,7 @@ class TenantSeeder extends Seeder
             'domain_name' => 'test',
             'tenant_id' => $tenant->id
         ]);
+        return $tenant;
 
     }
     public function createUser()

@@ -13,6 +13,9 @@ class QuizAttemptService
     public function index($request)
     {
         $quizAttempts = QuizAttempt::finished()
+        ->whenSearch($request['search'] ?? null)
+        ->whenType($request['quiz_type'] ?? null)
+        ->whenResult($request['result'] ?? null)
         ->orderBy('id','desc');
         if ($quizAttempts->count() && $request->filled('download') && $request->input('download') == 'csv') {
             return $this->handleDownload($request, $quizAttempts);

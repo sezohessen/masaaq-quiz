@@ -54,4 +54,12 @@ class Member extends Authenticatable
     {
         return false;
     }
+    /* Scopes */
+    public function scopeWhenSearch($query, $search)
+    {
+        return $query->when($search != null, function ($q) use ($search) {
+            return $q->where('name', 'LIKE', '%' . $search . '%')
+                    ->orWhere('email', 'LIKE', '%' . $search . '%');
+        });
+    }
 }

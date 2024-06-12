@@ -52,7 +52,24 @@ class QuizAttempt extends Model
             return $q->where('link', 'LIKE', '%' . $search . '%')
                 ->orWhereHas('quiz', function ($subQ) use ($search) {
                     return $subQ->whenSearch($search);
+                })
+                ->orWhereHas('member', function ($subQ) use ($search) {
+                    return $subQ->whenSearch($search);
                 });
+        });
+    }
+    public function scopeWhenType($query, $type)
+    {
+        return $query->when($type != null, function ($q) use ($type) {
+            return $q->whereHas('quiz', function ($subQ) use ($type) {
+                    return $subQ->where('quiz_type',$type);
+                });
+        });
+    }
+    public function scopeWhenResult($query, $result)
+    {
+        return $query->when($result != null, function ($q) use ($result) {
+            return $q->where('passed',$result);
         });
     }
     public function scopeWhenFinished($query, $type)

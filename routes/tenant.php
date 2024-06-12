@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Http\Controllers\Tenant\Auth\LoginController;
 use App\Http\Controllers\Tenant\Auth\RegisterController;
+use App\Http\Controllers\Tenant\Dashboard\CSV\FileController;
 use App\Http\Controllers\Tenant\Dashboard\DashboardController;
 use App\Http\Controllers\Tenant\Dashboard\Member\MemberController;
 use App\Http\Controllers\Tenant\Dashboard\Quiz\QuizController as DashboardQuizController;
@@ -61,6 +62,12 @@ Route::middleware([
             ->group(function () {
                 Route::get('/', [DashboardQuizAttemptController::class, 'index'])->name('index');
                 Route::get('/show/{quiz_attempt}', [DashboardQuizAttemptController::class, 'show'])->name('show');
+            });
+            Route::prefix('csv_files')
+            ->name('csv_files.')
+            ->group(function () {
+                Route::get('/', [FileController::class, 'index'])->name('index');
+                Route::get('/download/{file}', [FileController::class, 'show'])->name('show');
             });
     });
     Route::middleware(['auth'])

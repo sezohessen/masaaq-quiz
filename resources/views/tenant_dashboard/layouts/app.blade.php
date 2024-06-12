@@ -77,6 +77,11 @@
                         <i class="fas fa-check-circle mr-2"></i> {{ __('Quiz attempts') }}
                     </a>
                 </nav>
+                <nav class="flex flex-col">
+                    <a href="{{ route('dashboard.csv_files.index') }}" class="py-2 px-4 {{ $sub_link == 'csv_files' ? 'bg-gray-700' : '' }} hover:bg-gray-700">
+                        <i class="fas fa-file mr-2"></i> {{ __('Files') }}
+                    </a>
+                </nav>
             </div>
 
             <!-- Main Content -->

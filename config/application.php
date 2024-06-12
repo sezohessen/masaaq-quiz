@@ -8,4 +8,5 @@ return [
   'default_locale' => 'en',
   'perPage' => 10,
   'limitResults' => 10,
+  'csv_chunk_size' => 4000,
 ];

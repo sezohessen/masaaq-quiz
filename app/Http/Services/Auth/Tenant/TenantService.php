@@ -31,10 +31,10 @@ class TenantService
             DB::commit();
             $tenant = $this->createSubdomain($user,$request->domain);
             $user->update([
-                'domain_name' => $request->domain,
+                'domain_name' => $tenant->primary_domain?->domain,
                 'tenant_id' => $tenant->id
             ]);
-            return redirect()->route('tenants.index')->with('success',__('Client has been created successfully.'));
+            return redirect()->route('dashboard.tenants.index')->with('success',__('Client has been created successfully.'));
         } catch (\Exception $e) {
             DB::rollBack();
             dd($e->getMessage());

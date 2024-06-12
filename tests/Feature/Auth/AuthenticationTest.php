@@ -42,8 +42,7 @@ test('users can logout', function () {
 });
 test('tenant login and redirect', function () {
     $client = $this->createClient();
-    $tenantService = new TenantService();
-    $tenant = $tenantService->createSubdomain($client,'test');
+    $tenant = $this->createTenant($client,'test');
     $response = $this->post('/login', [
         'email' => $client->email,
         'password' => 'password',

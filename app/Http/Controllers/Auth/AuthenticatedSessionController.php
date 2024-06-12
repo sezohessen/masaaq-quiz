@@ -38,15 +38,9 @@ class AuthenticatedSessionController extends Controller
     {
         $userId = auth()->user()->id;
         Auth::logout();
-        $this->initializeTenant($tenant->id);
+        initializeTenant($tenant->id);
         return $tenant->impersonationUrl($userId,'dashboard.index');
     }
-
-    private function initializeTenant($tenantId)
-    {
-        tenancy()->initialize($tenantId);
-    }
-
     /**
      * Destroy an authenticated session.
      */

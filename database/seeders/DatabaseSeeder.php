@@ -27,6 +27,6 @@ class DatabaseSeeder extends Seeder
     public function initializeTenant()
     {
         $tenant = Tenant::first();
-        tenancy()->initialize($tenant->id);
+        initializeTenant($tenant->id);
     }
 }

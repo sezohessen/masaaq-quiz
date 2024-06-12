@@ -15,17 +15,12 @@ abstract class TenantCase extends BaseTestCase
     {
         parent::setUp();
         $tenant  = $this->initializeTenancy();
-        $url = $this->getURL($tenant);
-        URL::forceRootUrl($url);
-    }
-    public function getURL($tenant)
-    {
-        return 'http://' . $tenant->name.'.'. config('tenancy.central_domains')[0];
+        forceRootUrl($tenant);
     }
     public function initializeTenancy()
     {
         $tenant = $this->createTenant();
-        tenancy()->initialize($tenant);
+        initializeTenant($tenant);
         return $tenant;
     }
     public function createTenant()

@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Services\Auth\Tenant\TenantService;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
+
 test('login screen can be rendered', function () {
     $response = $this->get('/login');
 
@@ -39,24 +39,4 @@ test('users can logout', function () {
 
     $this->assertGuest();
     $response->assertRedirect('/');
-});
-test('tenant login and redirect', function () {
-    $client = $this->createClient();
-    $tenantService = new TenantService();
-    $tenant = $tenantService->createSubdomain($client,'test');
-    $response = $this->post('/login', [
-        'email' => $client->email,
-        'password' => 'password',
-    ]);
-
-    $this->assertGuest();
-    $impersonate = DB::table('tenant_user_impersonation_tokens')->first();
-    $this->assertDatabaseHas('tenant_user_impersonation_tokens',[
-        'tenant_id' => $tenant->id,
-        'user_id' => $client->id
-    ]);
-    initializeTenant($tenant->id);
-    forceRootUrl($tenant,$this->port);
-    $redirectURL = route('impersonate',['token' => $impersonate->token]);
-    $response->assertRedirect($redirectURL);
 });

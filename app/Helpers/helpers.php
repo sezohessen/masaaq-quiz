@@ -20,3 +20,17 @@ if (!function_exists('getAuth')) {
       return auth('sanctum')->user();
     }
 }
+if (!function_exists('forceRootUrl')) {
+    function forceRootUrl($tenant, $port = null)
+    {
+        if($port) $url = 'http://' . $tenant->name.'.'. config('tenancy.central_domains')[0] . ':' . $port;
+        else $url = 'http://' . $tenant->name.'.'. config('tenancy.central_domains')[0];
+        URL::forceRootUrl($url);
+    }
+}
+if (!function_exists('initializeTenant')) {
+    function initializeTenant($tenantId)
+    {
+        tenancy()->initialize($tenantId);
+    }
+}

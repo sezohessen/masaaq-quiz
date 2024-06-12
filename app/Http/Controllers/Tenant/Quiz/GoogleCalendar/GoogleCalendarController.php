@@ -26,7 +26,7 @@ class GoogleCalendarController extends Controller
         dd($tenant);
         if($tenant && $request->has('code')){
             dd($tenant , $request->has('code'));
-            $this->initializeTenant($tenant->id);
+            initializeTenant($tenant->id);
             return redirect()->route('google-calendar.save-access-token',['code' => $request->get('code')]);
         }else{
             return redirect()->route('home');
@@ -43,11 +43,6 @@ class GoogleCalendarController extends Controller
         dd(getAuth(),$code,$token);
         return redirect()->route('home')->with('success', 'Google Calendar connected successfully!');
     }
-    private function initializeTenant($tenantId)
-    {
-        tenancy()->initialize($tenantId);
-    }
-
     private function getClient()
     {
         $client = new Google_Client();

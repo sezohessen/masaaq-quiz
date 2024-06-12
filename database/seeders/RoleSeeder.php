@@ -30,6 +30,7 @@ class RoleSeeder extends Seeder
         return User::create([
             'email' => 'admin@admin.com',
             'name' => 'Admin',
+            'email_verified_at' => now(),
             'password' => createPassword('password')
         ]);
     }

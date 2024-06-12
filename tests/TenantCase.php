@@ -16,6 +16,7 @@ abstract class TenantCase extends BaseTestCase
         parent::setUp();
         $tenant  = $this->initializeTenancy();
         forceRootUrl($tenant);
+        $this->withoutVite();
     }
     public function initializeTenancy()
     {

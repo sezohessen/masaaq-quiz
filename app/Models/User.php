@@ -25,7 +25,8 @@ class User extends Authenticatable
         'email',
         'password',
         'domain_name',
-        'tenant_id'
+        'tenant_id',
+        'email_verified_at'
     ];
     public const CLIENT_ROLE = "Client owner";
     public const ADMIN_ROLE = "Administrator";

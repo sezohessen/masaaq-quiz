@@ -4,7 +4,16 @@
 <!--begin::Content-->
 <div class="content py-6 px-4 sm:px-6 lg:px-8">
     <!-- Breadcrumb -->
-    <x-breadCrumb.list_no_create section="Attempts"/>
+    <div class="flex items-center justify-between">
+        <x-breadCrumb.list_no_create section="Attempts"/>
+        <form action="#">
+            @csrf
+            <input type="hidden" name="download" value="csv">
+            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                Download CSV <i class="fa fa-download"></i>
+            </button>
+        </form>
+    </div>
 
     <!-- Quizzes Table -->
     <div class="overflow-hidden border border-gray-200 rounded-lg shadow-sm">
@@ -14,7 +23,7 @@
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Member</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Quiz</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Score</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Passed</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Result</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Finished At</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">View</th>
                 </tr>
@@ -24,7 +33,7 @@
                 <tr>
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $attempt->member?->name }}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $attempt->quiz?->title }}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $attempt->score }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $attempt->score}}/{{ $attempt->quiz?->score }}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                         @if ($attempt->passed)
                         <span class="text-green-600">Passed</span>

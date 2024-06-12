@@ -170,7 +170,9 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         App\Providers\TenancyServiceProvider::class,
-        App\Providers\TenancyAuthProvider::class
+        App\Providers\TenancyAuthProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
+
     ])->toArray(),
 
     /*
@@ -186,6 +188,8 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+
     ])->toArray(),
 
 ];

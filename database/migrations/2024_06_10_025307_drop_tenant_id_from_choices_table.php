@@ -12,9 +12,13 @@ return new class extends Migration
      */
     public function up(): void
     {
+        if (DB::getDriverName() !== 'sqlite') {
+            Schema::table('choices', function (Blueprint $table) {
+                $table->dropForeign(['tenant_id']);
+            });
+        }
         Schema::table('choices', function (Blueprint $table) {
-            $table->dropForeignSafe('tenant_id');
-            $table->dropColumn(['tenant_id']);
+            $table->dropColumn('tenant_id');
         });
     }
 

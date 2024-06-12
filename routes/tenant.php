@@ -5,6 +5,7 @@ declare(strict_types=1);
 use App\Http\Controllers\Tenant\Auth\LoginController;
 use App\Http\Controllers\Tenant\Auth\RegisterController;
 use App\Http\Controllers\Tenant\Dashboard\DashboardController;
+use App\Http\Controllers\Tenant\Dashboard\Member\MemberController;
 use App\Http\Controllers\Tenant\Dashboard\Quiz\QuizController as DashboardQuizController;
 use App\Http\Controllers\Tenant\Dashboard\QuizAttempt\QuizAttemptController as DashboardQuizAttemptController;
 use App\Http\Controllers\Tenant\Quiz\GoogleCalendar\GoogleCalendarController;
@@ -42,18 +43,22 @@ Route::middleware([
         ->prefix('dashboard')
         ->name('dashboard.')
         ->group(function () {
-            Route::get('/', [DashboardController::class, 'index'])->name('index');
             Route::prefix('quiz')
             ->name('quiz.')
-            ->group(function () {
-                Route::get('/create', [DashboardQuizController::class, 'create'])->name('create');
-                Route::post('/store', [DashboardQuizController::class, 'store'])->name('store');
-                Route::get('/index', [DashboardQuizController::class, 'index'])->name('index');
+            ->controller(DashboardQuizController::class)->group(function () {
+                Route::get('/', 'index')->name('index');
+                Route::get('/create', 'create')->name('create');
+                Route::post('/store', 'store')->name('store');
+            });
+            Route::prefix('member')
+            ->name('member.')
+            ->controller(MemberController::class)->group(function () {
+                Route::get('/', 'index')->name('index');
             });
             Route::prefix('quiz_attempt')
             ->name('quiz_attempt.')
             ->group(function () {
-                Route::get('/index', [DashboardQuizAttemptController::class, 'index'])->name('index');
+                Route::get('/', [DashboardQuizAttemptController::class, 'index'])->name('index');
                 Route::get('/show/{quiz_attempt}', [DashboardQuizAttemptController::class, 'show'])->name('show');
             });
     });

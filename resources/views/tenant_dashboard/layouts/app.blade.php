@@ -63,6 +63,11 @@
                     </a>
                 </nav>
                 <nav class="flex flex-col">
+                    <a href="{{ route('dashboard.member.index') }}" class="py-2 px-4 {{ $sub_link == 'member' ? 'bg-gray-700' : '' }} hover:bg-gray-700">
+                        <i class="fas fa-book"></i> {{ __('Members') }}
+                    </a>
+                </nav>
+                <nav class="flex flex-col">
                     <a href="{{ route('dashboard.quiz.index') }}" class="py-2 px-4 {{ $sub_link == 'quiz' ? 'bg-gray-700' : '' }} hover:bg-gray-700">
                         <i class="fas fa-book"></i> {{ __('Quizzes') }}
                     </a>

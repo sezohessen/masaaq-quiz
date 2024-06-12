@@ -26,6 +26,8 @@ class Member extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
         'google_access_token' => 'json',
+        'created_at' => 'date',
+        'updated_at' => 'date',
     ];
     public function subscribed_quizzes()
     {

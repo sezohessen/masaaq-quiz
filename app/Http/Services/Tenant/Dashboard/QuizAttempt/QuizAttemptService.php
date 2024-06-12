@@ -13,7 +13,9 @@ class QuizAttemptService
 {
     public function index($request)
     {
-        $quizAttempts = QuizAttempt::finished()->get();
+        $quizAttempts = QuizAttempt::finished()
+        ->orderBy('id','desc')
+        ->paginate(config('application.perPage',10));
         return view('tenant_dashboard.dashboard.quiz_attempt.index',compact('quizAttempts'));
     }
     public function show($request, QuizAttempt $quizAttempt)

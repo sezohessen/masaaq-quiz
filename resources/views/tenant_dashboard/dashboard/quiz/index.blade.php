@@ -45,6 +45,7 @@
                     @endforeach
                 </tbody>
             </table>
+            {{ $quizzes->withQueryString()->links() }}
         </div>
     </div>
 </div>

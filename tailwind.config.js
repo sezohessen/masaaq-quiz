@@ -19,5 +19,10 @@ export default {
 
     plugins: [forms,
         require('flowbite/plugin'),
+        require('tailwindcss-plugins/pagination')({
+            
+        }),
+
+
     ],
 };

@@ -12,7 +12,8 @@ class QuizService
 {
     public function index($request)
     {
-        $quizzes = Quiz::all();
+        $quizzes = Quiz::orderBy('id','desc')
+        ->paginate(config('application.perPage',10));
         return view('tenant_dashboard.dashboard.quiz.index',compact('quizzes'));
     }
     public function create($request)

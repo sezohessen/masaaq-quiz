@@ -3,13 +3,14 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Stancl\Tenancy\Database\Concerns\BelongsToTenant;
 
 class Quiz extends Model
 {
-    use BelongsToTenant;
+    use BelongsToTenant,HasFactory;
     protected $fillable = [
         'title', 'slug', 'description', 'quiz_type', 'start_time', 'end_time', 'score', 'number_of_questions'
     ];

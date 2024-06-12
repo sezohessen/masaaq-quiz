@@ -40,6 +40,7 @@
                 @endforeach
             </tbody>
         </table>
+        {{ $attempts->withQueryString()->links() }}
     </div>
 </div>
 <!--end::Content-->

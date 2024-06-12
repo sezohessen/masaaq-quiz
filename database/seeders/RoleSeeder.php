@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\PermissionRegistrar;
 
-class UserSeeder extends Seeder
+class RoleSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -23,16 +23,7 @@ class UserSeeder extends Seeder
             Role::firstOrCreate(['name' => $role]);
         }
         $this->createUser()->assignRole(User::ADMIN_ROLE);
-        $this->createMember();
 
-    }
-    public function createMember()
-    {
-        return User::create([
-            'email' => 'member1@account.com',
-            'name' => 'Member1',
-            'password' => createPassword('password')
-        ]);
     }
     public function createUser()
     {

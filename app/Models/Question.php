@@ -10,7 +10,7 @@ use Stancl\Tenancy\Database\Concerns\BelongsToTenant;
 
 class Question extends Model
 {
-    use BelongsToTenant;
+    use BelongsToTenant,HasFactory;
     protected $fillable = [
         'quiz_id', 'question', 'slug', 'description', 'score'
     ];

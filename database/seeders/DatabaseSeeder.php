@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Tenant;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,7 +14,19 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
-            UserSeeder::class
+            RoleSeeder::class,
+            TenantSeeder::class,
         ]);
+        $this->initializeTenant();
+        $this->call([
+            MemberSeeder::class,
+            QuizSeeder::class,
+            QuizAttemptSeeder::class
+        ]);
+    }
+    public function initializeTenant()
+    {
+        $tenant = Tenant::first();
+        tenancy()->initialize($tenant->id);
     }
 }

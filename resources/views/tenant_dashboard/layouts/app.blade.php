@@ -64,17 +64,17 @@
                 </nav>
                 <nav class="flex flex-col">
                     <a href="{{ route('dashboard.member.index') }}" class="py-2 px-4 {{ $sub_link == 'member' ? 'bg-gray-700' : '' }} hover:bg-gray-700">
-                        <i class="fas fa-book"></i> {{ __('Members') }}
+                        <i class="fas fa-users mr-2"></i> {{ __('Members') }}
                     </a>
                 </nav>
                 <nav class="flex flex-col">
                     <a href="{{ route('dashboard.quiz.index') }}" class="py-2 px-4 {{ $sub_link == 'quiz' ? 'bg-gray-700' : '' }} hover:bg-gray-700">
-                        <i class="fas fa-book"></i> {{ __('Quizzes') }}
+                        <i class="fas fa-question-circle mr-2"></i> {{ __('Quizzes') }}
                     </a>
                 </nav>
                 <nav class="flex flex-col">
                     <a href="{{ route('dashboard.quiz_attempt.index') }}" class="py-2 px-4 {{ $sub_link == 'quiz_attempt' ? 'bg-gray-700' : '' }} hover:bg-gray-700">
-                        <i class="fas fa-book"></i> {{ __('Quiz attempts') }}
+                        <i class="fas fa-check-circle mr-2"></i> {{ __('Quiz attempts') }}
                     </a>
                 </nav>
             </div>

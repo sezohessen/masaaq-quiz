@@ -43,6 +43,7 @@ Route::middleware([
         ->prefix('dashboard')
         ->name('dashboard.')
         ->group(function () {
+            Route::get('/', [DashboardController::class,'index'])->name('index');
             Route::prefix('quiz')
             ->name('quiz.')
             ->controller(DashboardQuizController::class)->group(function () {

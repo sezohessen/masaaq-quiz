@@ -52,7 +52,7 @@ class CreateQuizFormRequest extends FormRequest
             'choice_descriptions.*.*' => 'required|string',
             'is_corrects' => 'required|array|min:1',
             'is_corrects.*' => 'required|array|min:1',
-            'is_corrects.*.*' => 'required|in:0,1',
+/*             'is_corrects.*.*' => 'required|in:0,1', */
         ];
     }
     public function messages(): array
@@ -85,7 +85,7 @@ class CreateQuizFormRequest extends FormRequest
             'is_corrects.required' => 'Correct answers are required.',
             'is_corrects.*.required' => 'Each question must have at least one correct answer.',
             'is_corrects.*.*.required' => 'Each correct answer must be either 0 or 1.',
-            'is_corrects.*.*.in' => 'Each correct answer must be either 0 or 1.',
+            /* 'is_corrects.*.*.in' => 'Each correct answer must be either 0 or 1.', */
         ];
     }
 }

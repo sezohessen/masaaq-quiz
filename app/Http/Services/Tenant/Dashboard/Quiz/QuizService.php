@@ -30,7 +30,7 @@ class QuizService
 
             DB::commit();
 
-            return redirect()->back()->with('success',__('Created Successfully'));
+            return redirect()->route('dashboard.quiz.index')->with('success',__('Created Successfully'));
         } catch (\Exception $e) {
             DB::rollBack();
             logger($e->getMessage());//Sentry log

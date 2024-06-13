@@ -33,14 +33,13 @@ Follow these steps to set up the project:
     ```
 6. You can access you central domain by visiting : `http://localhost:8000` and tenant domain (created by seeder) by visiting `http://test.localhost:8000` (this is changed depend on you env `APP_URL`) if you want to change central domain do not forget to change env `CENTRAL_DOMAIN`
 
-    > Note: You can change the number of `attempts_records` (20 by default) before running the seed (in the `config/application.php` file) so you can downloading 20k CSV files.
+    > Note: You can change the number of `attempts_records` (20 by default) before running the seeders (in the `config/application.php` file) so you can downloading 20k CSV files.
 ## User Roles
 
 There are three types of users in the system:
 - **Super Admin**: Has access to all features and can manage client owners.
-- **Client Owner**: Has a dashboard and can log in only from the central domain with an account provided by the admin.
-- **Member**: Can access member-specific endpoints.
-
+- **Client Owner**: Has a dashboard and can log in only from the central domain with an account provided by the admin. he can create quizzes, see the attempts and download the attempts in CSV files.
+- **Member**: Can subscribe, attempt, and see results of the quiz
 ## Queue Management
 
 To manage the queue with priority, use the following command:
@@ -49,7 +48,7 @@ php artisan queue:work --queue=high,medium,low,default
 ```
 # API Endpoints
 
-Below are some of the available API endpoints for **Member interactions only**. You can import the provided Postman collection to see the full documentation with examples for each request.  
+Below are some of the available API endpoints for **Member interactions only**. You can import the provided Postman collection (`Massaq-Quiz.postman_collection.json`) to see the full documentation with examples for each request.  
 
 ## Authentication
 

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Rules;
-
+ 
 use App\Actions\CreateTenantAction;
 use App\Models\Domain;
 use App\Models\User;

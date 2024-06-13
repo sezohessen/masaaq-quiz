@@ -9,4 +9,4 @@ test('landing page',function(){
     ->toBe(0);
     expect($result->requests->duration->med)
     ->toBeLessThan(15);
-});
+})->skip('W8 until domain production');

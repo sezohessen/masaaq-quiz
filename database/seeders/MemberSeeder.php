@@ -11,9 +11,9 @@ class MemberSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-    public function run(): void
+    public function run()
     {
-        $this->createMember();
+        return $this->createMember();
     }
     public function createMember()
     {

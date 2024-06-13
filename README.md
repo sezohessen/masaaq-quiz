@@ -90,7 +90,8 @@ For Google Calendar integration **(Not completed yet)**:
 3. Set up the required OAuth credentials (Client ID).
 4. Upload the credentials file in the project’s configuration (`config/oauth-credentials.json`).
 5. Add your Google account to the "Test users" list in the OAuth consent screen settings, as the project will be in testing status.
-
+## Filament (Not finished yet)
+You can checkout for branch `FilamentInitialize` and update composer. then you can login as client owner and see the dashboard panel. It not done yet
 ## Contributing
 
 Contributions are welcome! Please follow the standard GitHub flow.

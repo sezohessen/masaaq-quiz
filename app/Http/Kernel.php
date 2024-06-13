@@ -51,6 +51,7 @@ class Kernel extends HttpKernel
             InitializeTenancyByDomainOrSubdomain::class,
             PreventAccessFromCentralDomains::class,
         ],
+        'universal' => [],
     ];
 
     /**

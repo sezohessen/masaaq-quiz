@@ -17,7 +17,7 @@ class QuizAttemptSeeder extends Seeder
     {
         $member = Member::first();
         $quizzes = Quiz::all();
-        for ($i = 0; $i < 20000; $i++) {
+        for ($i = 0; $i < config('application.attempts_records',20); $i++) {
             $quiz = $quizzes->random(1)->first();
             $link = Str::random(10);
             $member->subscribed_quizzes()->create([

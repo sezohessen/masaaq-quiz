@@ -9,4 +9,5 @@ return [
   'perPage' => 10,
   'limitResults' => 10,
   'csv_chunk_size' => 4000,
+  'attempts_records' => 20,
 ];

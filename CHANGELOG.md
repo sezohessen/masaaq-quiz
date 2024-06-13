@@ -4,17 +4,50 @@ All notable changes to the "Masaaq Quizzes Management System" project will be do
 
 ## [Unreleased]
 
-- Added Filament dashboard panel for client owners.
-- Implemented Google Calendar integration (Not completed yet).
-- Dockerize the application
-- Deploy the application to a server of your choice
-- Minor bug fixes and improvements and missing APIs.
+### Added
+
+- Registered new tenants successfully.
+- Created two types of quizzes: in-time quizzes and out-of-time quizzes.
+- Managed questions effectively.
+- Managed choices efficiently.
+- Registered new accounts for tenant members, keeping them separate from tenant owners.
+- Implemented member login/logout functionality.
+- Enabled subscription to quizzes for members.
+- Set up reminders for members before quiz start times.
+- Added attempts for quizzes for members.
+- Implemented quiz taking via unique email links and email notifications.
+- Provided the ability to view quiz results after completion.
+- Sent result and correct answer emails to members after quiz completion.
+- Sent notifications to tenant owners after a client takes a quiz.
+- Implemented dashboards for:
+    - Number of members
+    - Attempts
+    - Pass rate
+    - Fail rate
+    - Average score
+    - Average time for in-time quizzes
+- Enabled exporting quiz results for all members by tenant owners to CSV with filters, utilizing queues for efficient processing.
+- Created a REST API for the application, documented using Postman.
+- Wrote tests for the application using Pest.
+- Wrote stress testing for the application using Pest.
+- Wrote a README.md file for the application, explaining how to setup and run the application, and how to use the REST API with examples for every endpoint.
+- Wrote a CHANGELOG.md file for the application, explaining the changes made to the application and the new features added.
 
 ## [Version 1.0.0] - 2024-06-13
 
 ### Added
-- README.md with project overview, installation steps, user roles, API endpoints, testing instructions, stress testing guidelines, email setup instructions, contributing guidelines, and license information.
-- Github actions pipelines.
+
+- Multi-tenancy support using the `tenancyforlaravel` package.
+- Central and tenant domain setup instructions in the README.
+- User roles: Super Admin, Client Owner, and Member.
+- Queue management command for priority queue handling.
+- API endpoints for member interactions.
+- Pipeline action for GitHub Actions.
+- Testing instructions in the README.
+- Stress testing guidelines in the README.
+- Email setup instructions in the README.
+- Contributing guidelines in the README.
+- MIT License information in the README.
 
 ### Changed
 
@@ -29,20 +62,3 @@ All notable changes to the "Masaaq Quizzes Management System" project will be do
 
 - Deprecated features or unused code.
 
-## [Version 0.1.0] - 2024-06-01
-
-### Added
-
-- Initial project setup with basic functionalities.
-- Multi-tenancy support using the `tenancyforlaravel` package.
-- Central and tenant domain setup instructions in the README.
-- User roles: Super Admin, Client Owner, and Member.
-- Queue management command for priority queue handling.
-- Exporting CSV files
-- API endpoints for member interactions.
-- Pipeline action for GitHub Actions.
-- Testing instructions in the README.
-- Stress testing guidelines in the README.
-- Email setup instructions in the README.
-- Contributing guidelines in the README.
-- MIT License information in the README.

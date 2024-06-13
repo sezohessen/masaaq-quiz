@@ -55,7 +55,7 @@ test('tenant login and redirect', function () {
         'user_id' => $client->id
     ]);
     initializeTenant($tenant->id);
-    forceRootUrl($tenant,$this->port);
+    forceRootUrl($tenant);
     $redirectURL = route('impersonate',['token' => $impersonate->token]);
     $response->assertRedirect($redirectURL);
 });

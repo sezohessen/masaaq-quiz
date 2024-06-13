@@ -9,7 +9,7 @@ class LoginService
 {
     public function showLoginForm($request)
     {
-        return view('tenant.auth.login');
+        return view('tenant.Auth.login');
     }
     public function login($request)
     {

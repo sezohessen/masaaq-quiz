@@ -3,6 +3,7 @@
 namespace Tests;
 
 use App\Models\Quiz;
+use App\Models\User;
 use Database\Seeders\MemberSeeder;
 use Database\Seeders\RoleSeeder;
 use Database\Seeders\TenantSeeder;
@@ -31,6 +32,12 @@ abstract class TenantCase extends BaseTestCase
         $member = (new MemberSeeder())->run();
         $this->actingAs($member);
         return $member;
+    }
+    public function actAsClient()
+    {
+        $client = User::where('email','client@client.com')->first();
+        $this->actingAs($client);
+        return $client;
     }
     public function createTenant()
     {

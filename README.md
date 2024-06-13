@@ -1,78 +1,101 @@
-Assignment Blueprint for backend
-===============================
+# Masaaq Quizzes Management System
 
-This is a Laravel blueprint for backend development, for creating a multi-tenant application **(single database)** to manage quizzes
+This is a multi-tenancy project developed by Masaaq company to manage quizzes. The project uses a single database to handle multiple tenants. we use the [tenancyforlaravel](https://tenancyforlaravel.com/) package.
 
 ## Installation
-- clone this repository `git clone git@github.com:msaaqcom/assignment-blueprint-backend.git quiz`
-- edit origin to make new one for your custom repository in Github `git remote set-url origin` and add your repository url 
-- cd into the project directory `cd quiz`
-- run `composer install`
-- run `cp .env.example .env`
-- run migration `php artisan migrate`
-- serve the application `php artisan serve` or use laravel valet, or any other server
-- visit the application in your browser `http://quiz.test` if you are using valet
 
-## Multi-tenancy
-This application is multi-tenant, meaning that it can serve multiple clients with a single codebase. To achieve this, we use the [tenancyforlaravel](https://tenancyforlaravel.com/) package. The package is already installed and configured.
+Follow these steps to set up the project:
 
-## Available models
-- Tenant
-- User
-- Quiz
-- Question
-- Choice
+1. Clone the repository:
+    ```sh
+    git clone git@github.com:sezohessen/masaaq-quiz.git quiz
+    ```
 
->Note: you should create missing models, and migrations if needed, or any needed changes to the existing models.
+2. Change the repository origin to your custom repository:
+    ```sh
+    cd quiz
+    git remote set-url origin YOUR_REPOSITORY_URL
+    ```
 
-## Your Tasks
+3. Install the project dependencies:
+    ```sh
+    composer install
+    ```
 
-### Main Tasks
-- Ability to register a new tenant.
-- Ability to create a new quiz with two types for (in-time quiz, and out-of-time quiz).
-    >Note: in-time quiz is a quiz that has a start time, and end time, and the user can take the quiz only between these times. out-of-time quiz is a quiz that has no start time, and end time, and the user can take the quiz anytime.
-- Ability to manage questions.
-- Ability to manage choices.
-- Ability to register new accounts for a tenant members
-  >Note: members should be in separated table from the tenant owner(users).
-- Ability to login/logout for a tenant member.
-- Ability to subscribe to a quiz for a member.
-- Ability to integrate with Google calendar, and add a quiz (starts/ends time) to the calendar for a member.
-- Ability to remind a member to take a quiz before the quiz starts time.
-- Ability to add attempts for a quiz for a member.
-- Ability to take a quiz using a unique link for every member by only email, and send the link to email.
-- Ability to view the result of a quiz after taking it.
-- Ability to email the member after taking the quiz with the result of the quiz, and the correct answers.
-- Ability to email the owner of the tenant after a client takes a quiz.
-- Ability to view quiz results for all members by tenant owner, you can use [filament](https://filamentphp.com/) for this [bonus point].
-- Ability to export quiz results for all members by tenant owner to csv with filters by using queues.
-    >Note: use seeders to create dummy data for exporting. minimum 20000 records.
-- Ability to view dashboards for:
-  - Number of members
-  - Attempts
-  - Pass rate
-  - Fail rate
-  - Average score
-  - Average time (for in-time quiz)
-- Create a REST API for the application, and document it using [Postman](https://www.postman.com/).
-- Write tests for the application using [pest](https://pestphp.com/), already installed.
-- write stress testing for the application using [pest](https://pestphp.com/) [bonus point].
-- Write a `README.md` file for the application, explaining how to setup and run the application, and how to use the REST API with example for every endpoint.
-- Write a `CHANGELOG.md` file for the application, explaining the changes you made to the application, and the new features you added.
+4. Copy the example environment configuration file:
+    ```sh
+    cp .env.example .env
+    ```
 
-### Devops Tasks
-- Dockerize the application
-- Setup a CI/CD pipeline for the application using GitHub actions
-- Deploy the application to a server of your choice [bonus point]
+5. Run the database migrations and seed the database:
+    ```sh
+    php artisan migrate --seed
+    ```
+6. You can access you central domain by visiting : `http://localhost:8000` and tenant domain (created by seeder) by visiting `http://test.localhost:8000` (this is changed depend on you env `APP_URL`) if you want to change central domain do not forget to change env `CENTRAL_DOMAIN`
 
-## Points to consider
-- Use queues for sending emails, and other heavy tasks you may have [show your knowledge/skills of queues].
-- Use queues priority for organizing queues jobs/tasks [bonus point].
-- Make sure to use the correct relationships between models, and use the correct database structure.
-- Write a clean code, and follow the best practices.
-- Write a clean commit messages.
+    > Note: You can change the number of `attempts_records` (20 by default) before running the seed (in the `config/application.php` file) so you can downloading 20k CSV files.
+## User Roles
 
-## Notes
-- You can use [tailwindcss](https://tailwindcss.com/) for the frontend, with its free UI kit [tailwindui](https://tailwindui.com/).
-## TODO:
-- on queue run : php artisan queue:work --queue=high,medium,low,default
+There are three types of users in the system:
+- **Super Admin**: Has access to all features and can manage client owners.
+- **Client Owner**: Has a dashboard and can log in only from the central domain with an account provided by the admin.
+- **Member**: Can access member-specific endpoints.
+
+## Queue Management
+
+To manage the queue with priority, use the following command:
+```sh
+php artisan queue:work --queue=high,medium,low,default
+```
+# API Endpoints
+
+Below are some of the available API endpoints for **Member interactions only**. You can import the provided Postman collection to see the full documentation with examples for each request.  
+
+## Authentication
+
+- `/login` (POST)
+- `/register` (POST)
+
+## Quizzes
+
+- `/quiz/get`
+- `/quiz/result/{id}`
+- `/quiz/attempts`
+- `/quiz/show/{id}`
+- `/quiz/begin-quiz`
+- `/quiz/finish-quiz/{id}` (POST)
+- `/quiz/subscribe/{id}` (POST)
+
+## Running Tests
+
+This project includes a pipeline action that triggers on every push to the main branch. You can review the test results in GitHub Actions. before running tests you need to create DB for testing purpose (for now database name `assignment_blueprint_test`)
+
+To run tests locally, use the following command:
+
+```bash
+./vendor/bin/pest
+```
+
+## Stress Testing
+
+For stress testing, update the `APP_URL` in the `.env` file to your production domain and observe the results.
+
+## Email and Google Calendar Setup
+
+To attend quizzes via email, configure your mail settings in the `.env` file.
+
+For Google Calendar integration **(Not completed yet)**:
+
+1. Visit Google Cloud Console.
+2. Create a project and enable the Google Calendar API.
+3. Set up the required OAuth credentials (Client ID).
+4. Upload the credentials file in the project’s configuration (`config/oauth-credentials.json`).
+5. Add your Google account to the "Test users" list in the OAuth consent screen settings, as the project will be in testing status.
+
+## Contributing
+
+Contributions are welcome! Please follow the standard GitHub flow.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.

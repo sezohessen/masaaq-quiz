@@ -3,6 +3,9 @@
 All notable changes to the "Masaaq Quizzes Management System" project will be documented in this file.
 
 ## [Unreleased]
+- Deploy the application to a server of your choice.
+- Ability to view quiz results for all members by tenant owner, you can use filament for this (not completed yet)
+- Dockerize the application
 
 ### Added
 
@@ -37,7 +40,6 @@ All notable changes to the "Masaaq Quizzes Management System" project will be do
 
 ### Added
 
-- Multi-tenancy support using the `tenancyforlaravel` package.
 - Central and tenant domain setup instructions in the README.
 - User roles: Super Admin, Client Owner, and Member.
 - Queue management command for priority queue handling.
@@ -51,7 +53,6 @@ All notable changes to the "Masaaq Quizzes Management System" project will be do
 
 ### Changed
 
-- Improved database seeders for generating attempts records.
 - Updated testing instructions with the correct command.
 - Enhanced stress testing guidelines in the README.
 - Updated README with Filament dashboard panel information.

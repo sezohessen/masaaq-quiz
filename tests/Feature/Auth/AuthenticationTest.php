@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Services\Auth\Tenant\TenantService;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 test('login screen can be rendered', function () {
@@ -55,7 +54,7 @@ test('tenant login and redirect', function () {
         'user_id' => $client->id
     ]);
     initializeTenant($tenant->id);
-    forceRootUrl($tenant);
+    forceRootUrl($tenant,$this->port);
     $redirectURL = route('impersonate',['token' => $impersonate->token]);
     $response->assertRedirect($redirectURL);
 });

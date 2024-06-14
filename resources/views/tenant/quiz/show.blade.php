@@ -52,7 +52,7 @@
         <a href="{{ route('quiz.subscribe',['quiz' => $quiz->id]) }}" class="inline-block bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded">
             Subscribe
         </a>
-        <a href="{{ route('google-calendar.authorize') }}" class="inline-block bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
+        <a href="{{ route('google-calendar.authorize',['quiz' => $quiz->slug]) }}" class="inline-block bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
             Integrate google calendar
             <i class="fas fa-calendar"></i>
         </a>

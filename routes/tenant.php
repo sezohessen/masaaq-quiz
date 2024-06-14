@@ -89,8 +89,8 @@ Route::middleware([
         Route::prefix('google-calendar')
             ->name('google-calendar.')
             ->controller(GoogleCalendarController::class)->group(function () {
-                Route::get('/authorize', 'authorizeURL')->name('authorize');
-                Route::get('/save-access-token/{code}', 'saveAccessToken')->name('save-access-token');
+                Route::get('/authorize/{quiz:slug}', 'authorizeURL')->name('authorize');
+                Route::get('/save-access-token', 'saveAccessToken')->name('save-access-token');
             });
     });
     Route::post('/logout', function () {

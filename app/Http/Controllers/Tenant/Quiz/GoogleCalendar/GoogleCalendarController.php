@@ -6,8 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Interface\GoogleCalendar\CalendarServiceInterface;
 use App\Models\Quiz;
 use Illuminate\Http\Request;
-use Google_Client;
-use Google_Service_Calendar;
 use Exception;
 use Illuminate\Support\Facades\Log;
 
@@ -23,11 +21,16 @@ class GoogleCalendarController extends Controller
     public function authorizeURL(Request $request, Quiz $quiz)
     {
         try {
-            $client = $this->initializeGoogleClient();
+            $this->calendarService->initializeGoogleClient();
+            if ($this->calendarService->isAuthorized()) {
+                $this->calendarService->createEvent($quiz);
+                return redirect()->route('quiz.show', ['id' => $quiz->id, 'quiz' => $quiz->slug])
+                    ->with('success', 'Google Calendar connected and event created successfully!');
+            }
             $state = json_encode(['tenant_id' => tenant('id'), 'quiz_id' => $quiz->id]);
-            $client->setState($state);
+            $this->calendarService->client()->setState($state);
 
-            return redirect()->away($client->createAuthUrl());
+            return redirect()->away($this->calendarService->client()->createAuthUrl());
         } catch (Exception $e) {
             Log::error('Error generating Google authorization URL: ' . $e->getMessage());
             return redirect()->route('home')->with('error', 'Failed to initiate Google Calendar authorization.');
@@ -59,15 +62,14 @@ class GoogleCalendarController extends Controller
     {
         try {
             if ($request->has('code') && $request->has('quiz_id')) {
-                $client = $this->initializeGoogleClient();
-                $client->authenticate($request->get('code'));
-                $token = $client->getAccessToken();
+                $this->calendarService->client()->authenticate($request->get('code'));
+                $token = $this->calendarService->client()->getAccessToken();
 
                 getAuth()->update(['google_access_token' => $token]);
 
                 $quiz = Quiz::find($request->quiz_id);
                 if ($quiz) {
-                    $this->calendarService->createEvent($client, $quiz);
+                    $this->calendarService->createEvent($quiz);
                 }
 
                 return redirect()->route('quiz.show', ['id' => $quiz->id, 'quiz' => $quiz->slug])
@@ -78,20 +80,6 @@ class GoogleCalendarController extends Controller
         } catch (Exception $e) {
             Log::error('Error saving Google access token: ' . $e->getMessage());
             return redirect()->route('home')->with('error', 'Failed to save Google Calendar access token.');
-        }
-    }
-
-    private function initializeGoogleClient()
-    {
-        try {
-            $client = new Google_Client();
-            $client->setAuthConfig(config_path('oauth-credentials.json'));
-            $client->setRedirectUri(route('oauthcallback'));
-            $client->addScope(Google_Service_Calendar::CALENDAR);
-            return $client;
-        } catch (Exception $e) {
-            Log::error('Error initializing Google Client: ' . $e->getMessage());
-            throw new Exception('Failed to initialize Google Client.');
         }
     }
 }

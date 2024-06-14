@@ -14,7 +14,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->bind(CalendarServiceInterface::class, GoogleCalendarService::class);
+        $this->app->singleton(CalendarServiceInterface::class, function () {
+            $googleCalendarService = new GoogleCalendarService();
+            $googleCalendarService->initializeGoogleClient();
+            return $googleCalendarService;
+        });
 
     }
 

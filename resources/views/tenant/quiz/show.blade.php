@@ -51,9 +51,10 @@
         @else
         <a href="{{ route('quiz.subscribe',['quiz' => $quiz->id]) }}" class="inline-block bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded">
             Subscribe
+            <i class="fas fa-check"></i>
         </a>
         <a href="{{ route('google-calendar.authorize',['quiz' => $quiz->slug]) }}" class="inline-block bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
-            Integrate google calendar
+            Send reminder on google calendar
             <i class="fas fa-calendar"></i>
         </a>
         <span class="text-blue-500 block">Start at: {{ $quiz->start_time?->format('Y-m-d h:i A') }}</span>

@@ -67,7 +67,7 @@ Below are some of the available API endpoints for **Member interactions only**. 
 
 ## Running Tests
 
-This project includes a pipeline action that triggers on every push to the main branch. You can review the test results in GitHub Actions. before running tests you need to create DB for testing purpose (for now database name `assignment_blueprint_test`)
+This project includes a **pipeline actions** that triggers on every push to the main branch. You can review the test results in GitHub Actions. before running tests you need to create DB for testing purpose (for now database name `assignment_blueprint_test`)
 
 To run tests locally, use the following command:
 
@@ -85,13 +85,13 @@ To attend quizzes via email, configure your mail settings in the `.env` file.
 
 For Google Calendar integration :
 
-1. Visit Google Cloud Console.
+1. Visit [Google API console](https://console.developers.google.com/apis) and click "Select a project" in the header.
 2. Create a project and enable the Google Calendar API.
 3. Setup your required scopes like :
     1- `.../auth/userinfo.email`.
     2- `.../auth/userinfo.profile`.
     3- `openid`.
-    4- Google Calendar API	 `.../auth/calendar` **(Need verification when publish app)**.
+    4- Google Calendar API	 `.../auth/calendar` **(Need verification when publishing the app)**.
 3. Set up the required OAuth credentials (Client ID) and set the **Authorized redirect URL** like : `http://localhost:8000/oauthcallback` or your domain and attach `/oauthcallback`.
 4. Upload the credentials file in the project’s configuration (`config/oauth-credentials.json`).
 5. Add your Google account to the "Test users" list in the OAuth consent screen settings, as the project will be in testing status.

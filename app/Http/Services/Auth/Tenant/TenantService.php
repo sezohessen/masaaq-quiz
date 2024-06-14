@@ -37,7 +37,6 @@ class TenantService
             return redirect()->route('dashboard.tenants.index')->with('success',__('Client has been created successfully.'));
         } catch (\Exception $e) {
             DB::rollBack();
-            dd($e->getMessage());
             logger($e->getMessage());//TODO: integrate with sentry or something like that
             return redirect()->back()->with('error',__('Something went wrong.'));
         }

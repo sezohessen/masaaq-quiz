@@ -60,7 +60,6 @@ class GoogleCalendarService implements CalendarServiceInterface
 
             return $this->client;
         } catch (Exception $e) {
-            dd($e);
             Log::error('Error initializing Google Client: ' . $e->getMessage());
             throw new Exception('Failed to initialize Google Client.');
         }

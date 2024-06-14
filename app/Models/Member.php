@@ -15,6 +15,7 @@ class Member extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'google_access_token'
     ];
 
     /**

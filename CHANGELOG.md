@@ -6,6 +6,13 @@ All notable changes to the "Masaaq Quizzes Management System" project will be do
 - Deploy the application to a server of your choice.
 - Ability to view quiz results for all members by tenant owner, you can use filament for this (not completed yet)
 - Dockerize the application
+## [Version 1.1.0] - 2024-06-15
+
+### Added
+
+- Integrated Google Calendar API to manage quiz reminders efficiently.
+- Implemented the ability for users to save the Google access token for subsequent reminder requests without re-authorization.
+- Enhanced reminder functionality to allow multiple reminders for a single quiz attempt.
 
 ### Added
 

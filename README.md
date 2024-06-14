@@ -83,11 +83,16 @@ For stress testing, update the `APP_URL` in the `.env` file to your production d
 
 To attend quizzes via email, configure your mail settings in the `.env` file.
 
-For Google Calendar integration **(Not completed yet)**:
+For Google Calendar integration :
 
 1. Visit Google Cloud Console.
 2. Create a project and enable the Google Calendar API.
-3. Set up the required OAuth credentials (Client ID).
+3. Setup your required scopes like :
+    1- `.../auth/userinfo.email`.
+    2- `.../auth/userinfo.profile`.
+    3- `openid`.
+    4- Google Calendar API	 `.../auth/calendar` **(Need verification when publish app)**.
+3. Set up the required OAuth credentials (Client ID) and set the **Authorized redirect URL** like : `http://localhost:8000/oauthcallback` or your domain and attach `/oauthcallback`.
 4. Upload the credentials file in the project’s configuration (`config/oauth-credentials.json`).
 5. Add your Google account to the "Test users" list in the OAuth consent screen settings, as the project will be in testing status.
 ## Filament (Not finished yet)

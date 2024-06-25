@@ -55,7 +55,7 @@ class DashboardPanelProvider extends PanelProvider
                 DispatchServingFilamentEvent::class,
             ])
             ->authMiddleware([
-                Authenticate::class,
+                /* Authenticate::class, */ //Auth provider is for member not user (//TODO:Fix it)
                 ClientOwner::class
             ])
             ->tenantMiddleware([

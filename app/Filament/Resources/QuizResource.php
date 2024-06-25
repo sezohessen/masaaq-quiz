@@ -18,6 +18,7 @@ use Filament\Forms\Get;
 use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -44,32 +45,40 @@ class QuizResource extends Resource
                     ->required()
                     ->maxLength(255)
                     ->columnSpanFull(),
-                    Select::make('Type')
+                    Select::make('quiz_type')
                     ->options([
                         Quiz::InTimeType => 'In time',
                         Quiz::OutTimeType => 'Out time',
                     ])
                     ->required()
                     ->native(false),
-                    DateTimePicker::make('Start time'),
-                    DateTimePicker::make('End time'),
+                    DateTimePicker::make('start_time')
+                    ->native(false)
+                    ->seconds(false),
+                    DateTimePicker::make('end_time')
+                    ->native(false)
+                    ->seconds(false),
                 ]),
                 Section::make('Question')
                 ->description('questions information')
                 ->schema([
                     Select::make('question_id')
+                    /* ->multiple() */
+                    ->relationship('questions','Question')
                     ->required()
                     ->live()
-                    ->afterStateUpdated(fn(Set $set) => $set('choice_id',null))
-                    ->relationship(name:'questions',titleAttribute:'Question'),
+                    ->searchable()
+                    ->afterStateUpdated(fn(Set $set) => $set('choice_id',null)),
+
                     Select::make('choice_id')
+                    ->label('Choices')
+                    ->multiple()
                     ->required()
                     ->options(fn(Get $get): Collection => Choice::query()
                     ->where('question_id', $get('question_id'))
                     ->pluck('title','id'))
-
-                    /* ->searchable()
-                    ->preload(), */
+                    ->live()
+                    ->preload(),
                 ])->columns(2),
             ]);
     }
@@ -78,7 +87,16 @@ class QuizResource extends Resource
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('title')
+                ->searchable(),
+                TextColumn::make('description')->hidden(true),
+                TextColumn::make('type'),
+                TextColumn::make('score')->numeric(),
+                TextColumn::make('number_of_questions')->label('No. questions'),
+                TextColumn::make('created_at')
+                ->dateTime('M d, Y')
+                ->sortable()
+                ->toggleable(isToggledHiddenByDefault:true)
             ])
             ->filters([
                 //
